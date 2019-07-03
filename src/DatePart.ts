@@ -2,7 +2,7 @@ enum DatePart {
     Year,
     DayOfYear,
     Month,
-    Day
+    Day,
 }
 
 export default DatePart;

@@ -2,8 +2,21 @@
     "name": "hijri-js",
     "version": "0.0.1",
     "description": "A library to easily work with Hijri dates based on Um AlQura Calendar",
-    "main": "index.js",
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/esm/index.js",
+    "typings": "./dist/esm/index.d.ts",
+    "umd": "./dist/browser/hijri.js",
+    "umd_name": "hijri",
     "scripts": {
+        "clean": "node ./node_modules/rimraf/bin.js ./dist",
+        "build": "yarn run build:lint && yarn run build:esm && yarn run build:cjs && yarn run build:browser && yarn run build:uglify",
+        "build:lint": "node ./node_modules/tslint/bin/tslint -c ./tslint.json -p ./tsconfig.json",
+        "build:esm": "node ./node_modules/typescript/bin/tsc --module es2015 --outDir ./dist/esm -d && node ./build/process-dts.js",
+        "build:cjs": "node ./node_modules/typescript/bin/tsc --module commonjs --outDir ./dist/cjs",
+        "build:browser": "node ./node_modules/webpack-cli/bin/cli.js",
+        "build:uglify": "yarn run build:uglify:browser",
+        "build:uglify:browser": "node ./node_modules/uglify-js/bin/uglifyjs --source-map \"url='hijri.min.js.map',content='./dist/browser/hijri.js.map'\" --comments -o ./dist/browser/hijri.min.js ./dist/browser/hijri.js",
+        "prepack": "node ./build/embed-version.js",
         "test": "node ./node_modules/jest/bin/jest.js",
         "test:coverage": "node ./node_modules/jest/bin/jest.js --coverage"
     },
@@ -11,8 +24,14 @@
     "devDependencies": {
         "@types/jest": "^24.0.15",
         "jest": "^24.8.0",
+        "rimraf": "^2.6.3",
         "ts-jest": "^24.0.2",
-        "typescript": "^3.5.2"
+        "ts-loader": "^6.0.4",
+        "tslint": "^5.18.0",
+        "typescript": "^3.5.2",
+        "uglify-js": "^3.6.0",
+        "webpack": "^4.35.2",
+        "webpack-cli": "^3.3.5"
     },
     "keywords": [
         "hijri"

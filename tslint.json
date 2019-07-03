@@ -1,0 +1,18 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+        "max-line-length": {
+            "options": [300]
+        },
+        "member-ordering": false,
+        "interface-name": false,
+        "unified-signatures": false,
+        "max-classes-per-file": false,
+        "no-floating-promises": true,
+        "no-empty": false,
+        "no-bitwise": false,
+        "no-console": false,
+        "quotemark": false,
+        "object-literal-sort-keys": false
+    }
+}
