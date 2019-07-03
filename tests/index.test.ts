@@ -1,4 +1,4 @@
-import UmAlQuraCalendar from '../src/index';
+import UmAlQuraCalendar from '../src/UmAlQuraCalendar';
 
 describe('Date conversion', () => {
     it('gregorianToHijri() - direct map match', () => {
