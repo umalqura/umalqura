@@ -33,6 +33,10 @@
         "webpack": "^4.35.2",
         "webpack-cli": "^3.3.5"
     },
+    "files": [
+        "dist/**/*",
+        "src/**/*"
+    ],
     "keywords": [
         "hijri"
     ],
