@@ -1,5 +1,5 @@
 {
-    "name": "hijri-js",
+    "name": "@amef/hijri",
     "version": "0.0.1",
     "description": "A library to easily work with Hijri dates based on Um AlQura Calendar",
     "main": "./dist/cjs/index.js",
