@@ -1,0 +1,22 @@
+{
+    "name": "hijri-js",
+    "version": "0.0.1",
+    "description": "A library to easily work with Hijri dates based on Um AlQura Calendar",
+    "main": "index.js",
+    "scripts": {
+        "test": "node ./node_modules/jest/bin/jest.js",
+        "test:coverage": "node ./node_modules/jest/bin/jest.js --coverage"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@types/jest": "^24.0.15",
+        "jest": "^24.8.0",
+        "ts-jest": "^24.0.2",
+        "typescript": "^3.5.2"
+    },
+    "keywords": [
+        "hijri"
+    ],
+    "author": "Alaa Masoud",
+    "license": "MIT"
+}
