@@ -1,5 +1,7 @@
 import DateMapping from './DateMapping';
 import DatePart from './DatePart';
+import { format } from './format';
+import Locale from './locale/interface';
 
 /// Calendar support range:
 ///     Calendar    Minimum     Maximum
@@ -126,6 +128,26 @@ class UmAlQuraCalendar {
         return date.getDay();
     }
 
+    public static getWeekOfYear(date: Date) {
+        const { hy } = UmAlQuraCalendar.gregorianToHijri(date);
+        const { gy, gm, gd } = UmAlQuraCalendar.hijriToGregorian(hy, 1, 1);
+
+        const firstDayOfWeek = 0;
+        const firstDayOfWeekOfYear = new Date(gy, gm, gd).getDay();
+        const end = firstDayOfWeekOfYear - firstDayOfWeek;
+
+        let daysToDayOfWeek = firstDayOfWeekOfYear - date.getDay();
+        if (daysToDayOfWeek > end) {
+            daysToDayOfWeek -= 7;
+        }
+        if (daysToDayOfWeek < end - 7) {
+            daysToDayOfWeek += 7;
+        }
+
+        const d = UmAlQuraCalendar._addDays(date, daysToDayOfWeek);
+        return Math.ceil(UmAlQuraCalendar.getDayOfYear(d) / 7);
+    }
+
     public static getDaysInYear(year: number) {
         UmAlQuraCalendar._checkYearRange(year);
 
@@ -180,6 +202,11 @@ class UmAlQuraCalendar {
         }
 
         return new Date(lDate * UmAlQuraCalendar.millisPerDay + UmAlQuraCalendar._timeToMillis(hour, minute, second, millisecond));
+    }
+
+    public static format(date: Date, mask: string, locale: Locale) {
+        const { hy, hm, hd } = UmAlQuraCalendar.gregorianToHijri(date);
+        return format(date, mask, locale, hy, hm, hd, UmAlQuraCalendar.getWeekOfYear(date), UmAlQuraCalendar.getDayOfWeek(date));
     }
 
     private static _getDatePart(date: Date, part: DatePart) {
