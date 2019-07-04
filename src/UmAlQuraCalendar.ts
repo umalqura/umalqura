@@ -132,17 +132,8 @@ class UmAlQuraCalendar {
         const { hy } = UmAlQuraCalendar.gregorianToHijri(date);
         const { gy, gm, gd } = UmAlQuraCalendar.hijriToGregorian(hy, 1, 1);
 
-        const firstDayOfWeek = 0;
         const firstDayOfWeekOfYear = new Date(gy, gm, gd).getDay();
-        const end = firstDayOfWeekOfYear - firstDayOfWeek;
-
-        let daysToDayOfWeek = firstDayOfWeekOfYear - date.getDay();
-        if (daysToDayOfWeek > end) {
-            daysToDayOfWeek -= 7;
-        }
-        if (daysToDayOfWeek < end - 7) {
-            daysToDayOfWeek += 7;
-        }
+        const daysToDayOfWeek = firstDayOfWeekOfYear - date.getDay();
 
         const d = UmAlQuraCalendar._addDays(date, daysToDayOfWeek);
         return Math.ceil(UmAlQuraCalendar.getDayOfYear(d) / 7);

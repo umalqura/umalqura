@@ -83,6 +83,11 @@ describe('Date part retreival', () => {
         expect(dow).toBe(3); // Wednesday
     });
 
+    it('getWeekOfYear()', () => {
+        const woy = UmAlQuraCalendar.getWeekOfYear(new Date(2019, 6, 3));
+        expect(woy).toBe(43); // Wednesday
+    });
+
     it('getDaysInYear()', () => {
         const r = UmAlQuraCalendar.getDaysInYear(1440);
         expect(r).toBe(354);
