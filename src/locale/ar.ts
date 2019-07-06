@@ -12,9 +12,9 @@ const ar: Locale = {
     masks: {
         default: 'ddd dd mmm yyyy HH:MM:ss',
         shortDate: 'yy/m/d',
-        mediumDate: 'd mmm، yyyy',
-        longDate: 'd mmmm، yyyy',
-        fullDate: 'dddd، d mmmm، yyyy',
+        mediumDate: 'd mmm, yyyy',
+        longDate: 'd mmmm, yyyy',
+        fullDate: 'dddd, d mmmm, yyyy',
         shortTime: 'h:MM TT',
         mediumTime: 'h:MM:ss TT',
         longTime: 'h:MM:ss.l TT',
@@ -49,6 +49,7 @@ const ar: Locale = {
 
         return output + ' من';
     },
+    localizeCommas: (v: string) => v.replace(/,/g, '،'),
 };
 
 export default ar;

@@ -58,5 +58,5 @@ export function format(date: Date, mask: string, locale: Locale, hy: number, hm:
         N: locale.localizeNum(N),
     };
 
-    return mask.replace(token, (match) => flags[match]);
+    return locale.localizeCommas(mask.replace(token, (match) => flags[match]));
 }

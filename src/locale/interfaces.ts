@@ -20,6 +20,7 @@ interface Locale {
 
     localizeNum: (num: number | string) => string;
     localizeDayNum: (d: number) => string;
+    localizeCommas: (v: string) => string;
 }
 
 export default Locale;

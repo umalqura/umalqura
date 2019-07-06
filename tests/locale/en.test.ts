@@ -78,4 +78,8 @@ describe('English locale test', () => {
         expect(l.localizeDayNum(29)).toBe('th');
         expect(l.localizeDayNum(30)).toBe('th');
     });
+
+    it('localizeCommas', () => {
+        expect(l.localizeCommas('ddd, mmm')).toBe('ddd, mmm');
+    });
 });

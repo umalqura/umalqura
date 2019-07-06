@@ -19,6 +19,7 @@ const en: Locale = {
     localizeNum: (num: number | string) => String(num),
     // @ts-ignore
     localizeDayNum: (d: number) => ['th', 'st', 'nd', 'rd'][d % 10 > 3 ? 0 : (d % 100 - d % 10 !== 10) * d % 10],
+    localizeCommas: (v: string) => v,
 };
 
 export default en;

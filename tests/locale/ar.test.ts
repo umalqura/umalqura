@@ -26,9 +26,9 @@ describe('Arabic locale test', () => {
     it('masks', () => {
         expect(l.masks.default).toBe('ddd dd mmm yyyy HH:MM:ss');
         expect(l.masks.shortDate).toBe('yy/m/d');
-        expect(l.masks.mediumDate).toBe('d mmm، yyyy');
-        expect(l.masks.longDate).toBe('d mmmm، yyyy');
-        expect(l.masks.fullDate).toBe('dddd، d mmmm، yyyy');
+        expect(l.masks.mediumDate).toBe('d mmm, yyyy');
+        expect(l.masks.longDate).toBe('d mmmm, yyyy');
+        expect(l.masks.fullDate).toBe('dddd, d mmmm, yyyy');
         expect(l.masks.shortTime).toBe('h:MM TT');
         expect(l.masks.mediumTime).toBe('h:MM:ss TT');
         expect(l.masks.longTime).toBe('h:MM:ss.l TT');
@@ -91,5 +91,9 @@ describe('Arabic locale test', () => {
         expect(l.localizeDayNum(28)).toBe('الثامن والعشرون من');
         expect(l.localizeDayNum(29)).toBe('التاسع والعشرون من');
         expect(l.localizeDayNum(30)).toBe('الثلاثون من');
+    });
+
+    it('localizeCommas', () => {
+        expect(l.localizeCommas('ddd, mmm')).toBe('ddd، mmm');
     });
 });
