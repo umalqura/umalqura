@@ -6,8 +6,8 @@ import { en } from './locale';
 /// Calendar support range:
 ///     Calendar    Minimum     Maximum
 ///     ==========  ==========  ==========
-///     Gregorian   1900/04/30   2077/11/16
-///     UmAlQura    1318/01/01   1500/12/30
+///     Gregorian   1900/04/30  2077/11/16
+///     UmAlQura    1318/01/01  1500/12/30
 class UmAlQuraCalendar {
     private static readonly maxSeconds = 9223372036854775807 / 10000000;
     private static readonly minSeconds = -9223372036854775807 / 10000000;
