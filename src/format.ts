@@ -5,21 +5,6 @@ import Locale from './locale/interface';
 
 const token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LlSWN]|"[^"]*"|'[^']*'/g;
 
-export const masks = {
-    default: 'ddd mmm dd yyyy HH:MM:ss',
-    shortDate: 'm/d/yy',
-    mediumDate: 'mmm d, yyyy',
-    longDate: 'mmmm d, yyyy',
-    fullDate: 'dddd, mmmm d, yyyy',
-    shortTime: 'h:MM TT',
-    mediumTime: 'h:MM:ss TT',
-    longTime: 'h:MM:ss TT',
-    isoDate: 'yyyy-mm-dd',
-    isoTime: 'HH:MM:ss',
-    isoDateTime: 'yyyy-mm-dd\'T\'HH:MM:ss',
-    expiresHeaderFormat: 'ddd, dd mmm yyyy HH:MM:ss',
-};
-
 function pad(val: string | number, locale: Locale, len?: number) {
     val = String(val);
     len = len || 2;
@@ -30,11 +15,7 @@ function pad(val: string | number, locale: Locale, len?: number) {
 }
 
 export function format(date: Date, mask: string, locale: Locale, hy: number, hm: number, hd: number, woy: number, dow: number) {
-    if (!(date instanceof Date)) {
-        date = new Date(date);
-    }
-
-    mask = String(masks[mask] || mask || masks.default);
+    mask = String(locale.masks[mask] || mask || locale.masks.default);
 
     const _ = 'get';
     const d = hd;
@@ -77,10 +58,5 @@ export function format(date: Date, mask: string, locale: Locale, hy: number, hm:
         N: locale.localizeNum(N),
     };
 
-    return mask.replace(token, (match) => {
-        if (match in flags) {
-            return flags[match];
-        }
-        return match.slice(1, match.length - 1);
-    });
+    return mask.replace(token, (match) => flags[match]);
 }
