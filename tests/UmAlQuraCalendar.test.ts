@@ -1,4 +1,4 @@
-import { en } from '../src/locale';
+import { ar, en } from '../src/locale';
 import UmAlQuraCalendar from '../src/UmAlQuraCalendar';
 
 describe('Date conversion', () => {
@@ -156,13 +156,19 @@ describe('Date part retreival', () => {
     });
 });
 
-describe('Formatting', () => {
-    it('formats correctly', () => {
-        const f = UmAlQuraCalendar.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy HH:mm:ss.l', en);
-        expect(f).toBe('30/10/1440 02:10:15.200');
-    });
+describe('Locale', () => {
+    it('sets locale and uses it for formatting', () => {
+        UmAlQuraCalendar.setLocale(ar);
+        const f = UmAlQuraCalendar.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy HH:mm:ss.l');
+        expect(f).toBe('٣٠/١٠/١٤٤٠ ٠٢:١٠:١٥.٢٠٠');
 
-    it('formats english locale when no locale is given', () => {
+        // Put the locale back to its original state
+        UmAlQuraCalendar.setLocale(en);
+    });
+});
+
+describe('Formatting', () => {
+    it('formats correctly with default locale as English', () => {
         const f = UmAlQuraCalendar.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy HH:mm:ss.l');
         expect(f).toBe('30/10/1440 02:10:15.200');
     });

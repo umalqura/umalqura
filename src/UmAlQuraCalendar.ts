@@ -1,7 +1,7 @@
 import DateMapping from './DateMapping';
 import DatePart from './DatePart';
 import { format } from './format';
-import { en } from './locale';
+import { en, Locale } from './locale';
 
 /// Calendar support range:
 ///     Calendar    Minimum     Maximum
@@ -24,6 +24,16 @@ class UmAlQuraCalendar {
     private static readonly maxDate = new Date(2077, 10, 16, 23, 59, 59, 999);
 
     private static readonly hijriYearData = UmAlQuraCalendar._initDateMapping();
+
+    private static locale = en;
+
+    /**
+      * Sets the global locale to be used
+      * @param locale The locale
+      */
+    public static setLocale(locale: Locale) {
+        UmAlQuraCalendar.locale = locale;
+    }
 
     /**
       * Coverts the given Hijri date to Gregorian.
@@ -356,11 +366,12 @@ class UmAlQuraCalendar {
       * Formats the specified Gregorian Date instance in Hijri date.
       * @param date The date
       * @param mask The format mask
-      * @param locale The locale to use for formatting. Defaults to English.
       */
-    public static format(date: Date, mask: string, locale = en) {
+    public static format(date: Date, mask: string) {
         const { hy, hm, hd } = UmAlQuraCalendar.gregorianToHijri(date);
-        return format(date, mask, locale, hy, hm, hd, UmAlQuraCalendar.getWeekOfYear(date), UmAlQuraCalendar.getDayOfWeek(date));
+        return format(date, mask, UmAlQuraCalendar.locale, hy, hm, hd,
+            UmAlQuraCalendar.getWeekOfYear(date),
+            UmAlQuraCalendar.getDayOfWeek(date));
     }
 
     private static _getDatePart(date: Date, part: DatePart) {
