@@ -1,4 +1,4 @@
-import en from '../src/locale/en';
+import { en } from '../src/locale';
 import UmAlQuraCalendar from '../src/UmAlQuraCalendar';
 
 describe('Date conversion', () => {
@@ -90,8 +90,11 @@ describe('Date part retreival', () => {
     });
 
     it('getDaysInYear()', () => {
-        const r = UmAlQuraCalendar.getDaysInYear(1440);
-        expect(r).toBe(354);
+        const r1 = UmAlQuraCalendar.getDaysInYear(1440);
+        expect(r1).toBe(354);
+
+        const r2 = UmAlQuraCalendar.getDaysInYear(1441);
+        expect(r2).toBe(355);
     });
 
     it('getDaysInMonth()', () => {
@@ -118,6 +121,11 @@ describe('Date part retreival', () => {
 describe('Formatting', () => {
     it('formats correctly', () => {
         const f = UmAlQuraCalendar.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy HH:mm:ss.l', en);
+        expect(f).toBe('30/10/1440 02:10:15.200');
+    });
+
+    it('formats english locale when no locale is given', () => {
+        const f = UmAlQuraCalendar.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy HH:mm:ss.l');
         expect(f).toBe('30/10/1440 02:10:15.200');
     });
 });

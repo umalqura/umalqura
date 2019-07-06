@@ -1,4 +1,4 @@
-import Locale from './interface';
+import Locale from './interfaces';
 
 const en: Locale = {
     dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],

@@ -1,7 +1,7 @@
 import DateMapping from './DateMapping';
 import DatePart from './DatePart';
 import { format } from './format';
-import Locale from './locale/interface';
+import { en } from './locale';
 
 /// Calendar support range:
 ///     Calendar    Minimum     Maximum
@@ -195,7 +195,7 @@ class UmAlQuraCalendar {
         return new Date(lDate * UmAlQuraCalendar.millisPerDay + UmAlQuraCalendar._timeToMillis(hour, minute, second, millisecond));
     }
 
-    public static format(date: Date, mask: string, locale: Locale) {
+    public static format(date: Date, mask: string, locale = en) {
         const { hy, hm, hd } = UmAlQuraCalendar.gregorianToHijri(date);
         return format(date, mask, locale, hy, hm, hd, UmAlQuraCalendar.getWeekOfYear(date), UmAlQuraCalendar.getDayOfWeek(date));
     }

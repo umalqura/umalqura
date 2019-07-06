@@ -1,7 +1,7 @@
 // Parts of this file are (c) 2007-2009 Steven Levithan <stevenlevithan.com>
 // https://github.com/felixge/node-dateformat/blob/master/lib/dateformat.js
 
-import Locale from './locale/interface';
+import Locale from './locale/interfaces';
 
 const token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LlSWN]|"[^"]*"|'[^']*'/g;
 

@@ -1,4 +1,4 @@
-import Locale from './interface';
+import Locale from './interfaces';
 
 const symbolMap = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 const dayNumMap = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر', 'الحادي عشر'];
