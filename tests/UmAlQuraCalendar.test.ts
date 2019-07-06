@@ -172,6 +172,11 @@ describe('Formatting', () => {
         const f = UmAlQuraCalendar.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy HH:mm:ss.l');
         expect(f).toBe('30/10/1440 02:10:15.200');
     });
+
+    it('can override global locale', () => {
+        const f = UmAlQuraCalendar.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy HH:mm:ss.l', ar);
+        expect(f).toBe('٣٠/١٠/١٤٤٠ ٠٢:١٠:١٥.٢٠٠');
+    });
 });
 
 describe('Input validation', () => {

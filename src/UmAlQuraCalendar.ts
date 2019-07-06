@@ -366,10 +366,11 @@ class UmAlQuraCalendar {
       * Formats the specified Gregorian Date instance in Hijri date.
       * @param date The date
       * @param mask The format mask
+      * @param locale The locale to use. If omitted, uses the default locale or the locale set via `setLocale`
       */
-    public static format(date: Date, mask: string) {
+    public static format(date: Date, mask: string, locale?: Locale) {
         const { hy, hm, hd } = UmAlQuraCalendar.gregorianToHijri(date);
-        return format(date, mask, UmAlQuraCalendar.locale, hy, hm, hd,
+        return format(date, mask, locale || UmAlQuraCalendar.locale, hy, hm, hd,
             UmAlQuraCalendar.getWeekOfYear(date),
             UmAlQuraCalendar.getDayOfWeek(date));
     }
