@@ -230,6 +230,95 @@ class UmAlQuraCalendar {
     }
 
     /**
+     * Returns the Gregorian date corresponding to the Hijri date starting at the specified unit of time.
+     * @param date: The date
+     * @param unit: The unit of time
+     */
+    public static startOf(date: Date, unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second') {
+        const d = new Date(date);
+        const { hy, hm } = UmAlQuraCalendar.gregorianToHijri(d);
+
+        switch (unit) {
+            case 'year':
+                return UmAlQuraCalendar.toDate(hy, 1, 1, 0, 0, 0, 0);
+            case 'month':
+                return UmAlQuraCalendar.toDate(hy, hm, 1, 0, 0, 0, 0);
+            case 'week':
+                const dow = UmAlQuraCalendar.getDayOfWeek(d);
+                const sow = UmAlQuraCalendar._addDays(d, -dow);
+                sow.setHours(0);
+                sow.setMinutes(0);
+                sow.setSeconds(0);
+                sow.setMilliseconds(0);
+                return sow;
+            case 'day':
+                d.setHours(0);
+                d.setMinutes(0);
+                d.setSeconds(0);
+                d.setMilliseconds(0);
+                return d;
+            case 'hour':
+                d.setMinutes(0);
+                d.setSeconds(0);
+                d.setMilliseconds(0);
+                return d;
+            case 'minute':
+                d.setSeconds(0);
+                d.setMilliseconds(0);
+                return d;
+            case 'second':
+                d.setMilliseconds(0);
+                return d;
+        }
+    }
+
+    /**
+     * Returns the Gregorian date corresponding to the Hijri date ending at the specified unit of time.
+     * @param date: The date
+     * @param unit: The unit of time
+     */
+    public static endOf(date: Date, unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second') {
+        const d = new Date(date);
+        const { hy, hm } = UmAlQuraCalendar.gregorianToHijri(d);
+        let daysInMonth;
+
+        switch (unit) {
+            case 'year':
+                daysInMonth = UmAlQuraCalendar.getDaysInMonth(hy, 12);
+                return UmAlQuraCalendar.toDate(hy, 12, daysInMonth, 23, 59, 59, 999);
+            case 'month':
+                daysInMonth = UmAlQuraCalendar.getDaysInMonth(hy, hm);
+                return UmAlQuraCalendar.toDate(hy, hm, daysInMonth, 23, 59, 59, 999);
+            case 'week':
+                const dow = UmAlQuraCalendar.getDayOfWeek(d);
+                const sow = UmAlQuraCalendar._addDays(d, 6 - dow);
+                sow.setHours(23);
+                sow.setMinutes(59);
+                sow.setSeconds(59);
+                sow.setMilliseconds(999);
+                return sow;
+            case 'day':
+                d.setHours(23);
+                d.setMinutes(59);
+                d.setSeconds(59);
+                d.setMilliseconds(999);
+                return d;
+            case 'hour':
+                d.setMinutes(59);
+                d.setSeconds(59);
+                d.setMilliseconds(999);
+                return d;
+            case 'minute':
+                d.setSeconds(59);
+                d.setMilliseconds(999);
+                return d;
+            case 'second':
+                d.setMilliseconds(999);
+                return d;
+        }
+    }
+
+    /**
       * Returns whether or not the given Hijri year is a leap year.
       * A Hijri leap year is where the number of days in that year is 355.
       * @param hy The Hijri year

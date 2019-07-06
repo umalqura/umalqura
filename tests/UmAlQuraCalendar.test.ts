@@ -112,6 +112,44 @@ describe('Date part retreival', () => {
         expect(r).toBe(10);
     });
 
+    it('startOf', () => {
+        const d = new Date(2019, 6, 3, 14, 47, 35, 200);
+        const startOfYear = UmAlQuraCalendar.startOf(d, 'year');
+        const startOfMonth = UmAlQuraCalendar.startOf(d, 'month');
+        const startOfWeek = UmAlQuraCalendar.startOf(d, 'week');
+        const startOfDay = UmAlQuraCalendar.startOf(d, 'day');
+        const startOfHour = UmAlQuraCalendar.startOf(d, 'hour');
+        const startOfMinute = UmAlQuraCalendar.startOf(d, 'minute');
+        const startOfSecond = UmAlQuraCalendar.startOf(d, 'second');
+
+        expect(startOfYear).toEqual(new Date(2018, 8, 11, 0, 0, 0, 0));
+        expect(startOfMonth).toEqual(new Date(2019, 5, 4, 0, 0, 0, 0));
+        expect(startOfWeek).toEqual(new Date(2019, 5, 30, 0, 0, 0, 0));
+        expect(startOfDay).toEqual(new Date(2019, 6, 3, 0, 0, 0, 0));
+        expect(startOfHour).toEqual(new Date(2019, 6, 3, 14, 0, 0, 0));
+        expect(startOfMinute).toEqual(new Date(2019, 6, 3, 14, 47, 0, 0));
+        expect(startOfSecond).toEqual(new Date(2019, 6, 3, 14, 47, 35, 0));
+    });
+
+    it('endOf', () => {
+        const d = new Date(2019, 6, 3, 14, 47, 35, 200);
+        const endOfYear = UmAlQuraCalendar.endOf(d, 'year');
+        const endOfMonth = UmAlQuraCalendar.endOf(d, 'month');
+        const endOfWeek = UmAlQuraCalendar.endOf(d, 'week');
+        const endOfDay = UmAlQuraCalendar.endOf(d, 'day');
+        const endOfHour = UmAlQuraCalendar.endOf(d, 'hour');
+        const endOfMinute = UmAlQuraCalendar.endOf(d, 'minute');
+        const endOfSecond = UmAlQuraCalendar.endOf(d, 'second');
+
+        expect(endOfYear).toEqual(new Date(2019, 7, 30, 23, 59, 59, 999));
+        expect(endOfMonth).toEqual(new Date(2019, 6, 3, 23, 59, 59, 999));
+        expect(endOfWeek).toEqual(new Date(2019, 6, 6, 23, 59, 59, 999));
+        expect(endOfDay).toEqual(new Date(2019, 6, 3, 23, 59, 59, 999));
+        expect(endOfHour).toEqual(new Date(2019, 6, 3, 14, 59, 59, 999));
+        expect(endOfMinute).toEqual(new Date(2019, 6, 3, 14, 47, 59, 999));
+        expect(endOfSecond).toEqual(new Date(2019, 6, 3, 14, 47, 35, 999));
+    });
+
     it('isLeapYear()', () => {
         const r = UmAlQuraCalendar.isLeapYear(1440);
         expect(r).toBeFalsy();
