@@ -1,3 +1,4 @@
+import en from '../src/locale/en';
 import UmAlQuraCalendar from '../src/UmAlQuraCalendar';
 
 describe('Date conversion', () => {
@@ -111,6 +112,13 @@ describe('Date part retreival', () => {
     it('isLeapYear()', () => {
         const r = UmAlQuraCalendar.isLeapYear(1440);
         expect(r).toBeFalsy();
+    });
+});
+
+describe('Formatting', () => {
+    it('formats correctly', () => {
+        const f = UmAlQuraCalendar.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy HH:mm:ss.l', en);
+        expect(f).toBe('30/10/1440 02:10:15.200');
     });
 });
 
