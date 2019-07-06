@@ -338,7 +338,7 @@ class UmAlQuraCalendar {
     }
 
     private static _dayDiff(date: Date, other: Date) {
-        return Math.round((date.getTime() - other.getTime()) / (1000 * 60 * 60 * 24));
+        return (date.getTime() - other.getTime()) / (1000 * 60 * 60 * 24);
     }
 
     private static _initDateMapping() {

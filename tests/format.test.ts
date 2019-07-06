@@ -3,11 +3,11 @@ import en from '../src/locale/en';
 import UmAlQuraCalendar from '../src/UmAlQuraCalendar';
 
 const expects = {
-    default: 'Wed Dhū-Q 01 1440 13:19:44',
-    shortDate: '11/1/40',
-    mediumDate: 'Dhū-Q 1, 1440',
-    longDate: 'Dhū al-Qa‘dah 1, 1440',
-    fullDate: 'Wednesday, Dhū al-Qa‘dah 1, 1440',
+    default: 'Wed Shw 30 1440 13:19:44',
+    shortDate: '10/30/40',
+    mediumDate: 'Shw 30, 1440',
+    longDate: 'Shawwāl 30, 1440',
+    fullDate: 'Wednesday, Shawwāl 30, 1440',
     shortTime: '1:19 PM',
     mediumTime: '1:19:44 PM',
     longTime: '1:19:44.000 PM',
