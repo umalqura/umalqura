@@ -75,7 +75,7 @@ describe('Date part retreival', () => {
     });
 
     it('gGetDayOfMonth()', () => {
-        const dom = UmAlQuraCalendar.gGetDayOfMonth(new Date(2019, 6, 3));
+        const dom = UmAlQuraCalendar.getDayOfMonth(new Date(2019, 6, 3));
         expect(dom).toBe(30);
     });
 
