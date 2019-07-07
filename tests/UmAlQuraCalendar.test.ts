@@ -66,6 +66,22 @@ describe('Date manipulation', () => {
         expect(d.getMonth()).toBe(6);
         expect(d.getDate()).toBe(31);
     });
+
+    it('addWeeks()', () => {
+        const d = UmAlQuraCalendar.addWeeks(new Date(2019, 6, 3), 5);
+
+        expect(d.getFullYear()).toBe(2019);
+        expect(d.getMonth()).toBe(7);
+        expect(d.getDate()).toBe(7);
+    });
+
+    it('addDays()', () => {
+        const d = UmAlQuraCalendar.addDays(new Date(2019, 6, 3), 5);
+
+        expect(d.getFullYear()).toBe(2019);
+        expect(d.getMonth()).toBe(6);
+        expect(d.getDate()).toBe(8);
+    });
 });
 
 describe('Date part retreival', () => {

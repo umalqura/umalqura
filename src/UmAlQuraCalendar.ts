@@ -57,7 +57,7 @@ class UmAlQuraCalendar {
             b >>= 1;
         }
 
-        dt = UmAlQuraCalendar._addDays(dt, nDays);
+        dt = UmAlQuraCalendar.addDays(dt, nDays);
 
         return {
             gy: dt.getFullYear(),
@@ -147,6 +147,26 @@ class UmAlQuraCalendar {
     }
 
     /**
+      * Adds the specified amount of weeks to the given Gregorian date.
+      * @param date The date
+      * @param wks The weeks to be added
+      */
+    public static addWeeks(date: Date, wks: number) {
+        return UmAlQuraCalendar.addDays(date, wks * 7);
+    }
+
+    /**
+      * Adds the specified amount of days to the given Gregorian date.
+      * @param date The date
+      * @param days The days to be added
+      */
+    public static addDays(date: Date, days: number) {
+        const d = new Date(date.valueOf());
+        d.setDate(d.getDate() + days);
+        return d;
+    }
+
+    /**
       * Returns the Hijri day of year for the specified Gregorian date.
       * @param date The date
       */
@@ -178,7 +198,7 @@ class UmAlQuraCalendar {
         const firstDayOfYear = UmAlQuraCalendar.startOf(date, 'year').getDay();
         const daysToDayOfWeek = firstDayOfYear - date.getDay();
 
-        const d = UmAlQuraCalendar._addDays(date, daysToDayOfWeek);
+        const d = UmAlQuraCalendar.addDays(date, daysToDayOfWeek);
         return Math.ceil(UmAlQuraCalendar.getDayOfYear(d) / 7);
     }
 
@@ -266,7 +286,7 @@ class UmAlQuraCalendar {
      * @param unit: The unit of time
      */
     public static startOf(date: Date, unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second') {
-        const d = new Date(date);
+        let d = new Date(date);
         const { hy, hm } = UmAlQuraCalendar.gregorianToHijri(d);
 
         switch (unit) {
@@ -276,33 +296,21 @@ class UmAlQuraCalendar {
                 return UmAlQuraCalendar.toDate(hy, hm, 1, 0, 0, 0, 0);
             case 'week':
                 const dow = UmAlQuraCalendar.getDayOfWeek(d);
-                const sow = UmAlQuraCalendar._addDays(d, -dow);
-                sow.setHours(0);
-                sow.setMinutes(0);
-                sow.setSeconds(0);
-                sow.setMilliseconds(0);
-                return sow;
+                d = UmAlQuraCalendar.addDays(d, -dow);
             case 'day':
                 d.setHours(0);
-                d.setMinutes(0);
-                d.setSeconds(0);
-                d.setMilliseconds(0);
-                return d;
             case 'hour':
                 d.setMinutes(0);
-                d.setSeconds(0);
-                d.setMilliseconds(0);
-                return d;
             case 'minute':
                 d.setSeconds(0);
-                d.setMilliseconds(0);
-                return d;
             case 'second':
                 d.setMilliseconds(0);
-                return d;
+                break;
+            default:
+                throw new Error('Invalid value for `unit` param');
         }
 
-        throw new Error('Invalid value for `unit` param');
+        return d;
     }
 
     /**
@@ -311,7 +319,7 @@ class UmAlQuraCalendar {
      * @param unit: The unit of time
      */
     public static endOf(date: Date, unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second') {
-        const d = new Date(date);
+        let d = new Date(date);
         const { hy, hm } = UmAlQuraCalendar.gregorianToHijri(d);
         let daysInMonth;
 
@@ -324,33 +332,21 @@ class UmAlQuraCalendar {
                 return UmAlQuraCalendar.toDate(hy, hm, daysInMonth, 23, 59, 59, 999);
             case 'week':
                 const dow = UmAlQuraCalendar.getDayOfWeek(d);
-                const sow = UmAlQuraCalendar._addDays(d, 6 - dow);
-                sow.setHours(23);
-                sow.setMinutes(59);
-                sow.setSeconds(59);
-                sow.setMilliseconds(999);
-                return sow;
+                d = UmAlQuraCalendar.addDays(d, 6 - dow);
             case 'day':
                 d.setHours(23);
-                d.setMinutes(59);
-                d.setSeconds(59);
-                d.setMilliseconds(999);
-                return d;
             case 'hour':
                 d.setMinutes(59);
-                d.setSeconds(59);
-                d.setMilliseconds(999);
-                return d;
             case 'minute':
                 d.setSeconds(59);
-                d.setMilliseconds(999);
-                return d;
             case 'second':
                 d.setMilliseconds(999);
-                return d;
+                break;
+            default:
+                throw new Error('Invalid value for `unit` param');
         }
 
-        throw new Error('Invalid value for `unit` param');
+        return d;
     }
 
     /**
@@ -455,12 +451,6 @@ class UmAlQuraCalendar {
         if (millis < UmAlQuraCalendar.minDate.getTime() || millis > UmAlQuraCalendar.maxDate.getTime()) {
             throw new Error(`Invalid value for epoch. Must be between ${UmAlQuraCalendar.minDate.getTime()} and ${UmAlQuraCalendar.maxDate.getTime()}.`);
         }
-    }
-
-    private static _addDays(date: Date, days: number) {
-        const d = new Date(date.valueOf());
-        d.setDate(d.getDate() + days);
-        return d;
     }
 
     private static _dayDiff(date: Date, other: Date) {
