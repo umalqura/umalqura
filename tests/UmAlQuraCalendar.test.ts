@@ -216,6 +216,16 @@ describe('Input validation', () => {
         expect(() => UmAlQuraCalendar.gregorianToHijri(new Date(100, 1, 1))).toThrow('Invalid value for epoch. Must be between -2198718412000 and 3404321999999.');
     });
 
+    it('startOf() throws for invalid unit', () => {
+        // @ts-ignore
+        expect(() => UmAlQuraCalendar.startOf(new Date(), 'invalid')).toThrow('Invalid value for `unit` param');
+    });
+
+    it('endOf() throws for invalid unit', () => {
+        // @ts-ignore
+        expect(() => UmAlQuraCalendar.endOf(new Date(), 'invalid')).toThrow('Invalid value for `unit` param');
+    });
+
     it('toDate() throws for invalid month end day', () => {
         // Ramadan 1440 is 29 days only
         expect(() => UmAlQuraCalendar.toDate(1440, 9, 30)).toThrow('Invalid value for day for the given year/month. Day must be between 1 and 29.');

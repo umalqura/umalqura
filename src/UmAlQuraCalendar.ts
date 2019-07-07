@@ -175,10 +175,7 @@ class UmAlQuraCalendar {
       * @param date The date
       */
     public static getWeekOfYear(date: Date) {
-        const { hy } = UmAlQuraCalendar.gregorianToHijri(date);
-        const { gy, gm, gd } = UmAlQuraCalendar.hijriToGregorian(hy, 1, 1);
-
-        const firstDayOfYear = new Date(gy, gm, gd).getDay();
+        const firstDayOfYear = UmAlQuraCalendar.startOf(date, 'year').getDay();
         const daysToDayOfWeek = firstDayOfYear - date.getDay();
 
         const d = UmAlQuraCalendar._addDays(date, daysToDayOfWeek);
@@ -304,6 +301,8 @@ class UmAlQuraCalendar {
                 d.setMilliseconds(0);
                 return d;
         }
+
+        throw new Error('Invalid value for `unit` param');
     }
 
     /**
@@ -350,6 +349,8 @@ class UmAlQuraCalendar {
                 d.setMilliseconds(999);
                 return d;
         }
+
+        throw new Error('Invalid value for `unit` param');
     }
 
     /**
