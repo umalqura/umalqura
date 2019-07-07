@@ -147,7 +147,7 @@ class UmAlQuraCalendar {
     }
 
     /**
-      * Returns the Hijri year for the specified Gregorian date.
+      * Returns the Hijri day of year for the specified Gregorian date.
       * @param date The date
       */
     public static getDayOfYear(date: Date) {
