@@ -240,6 +240,30 @@ class UmAlQuraCalendar {
     }
 
     /**
+      * Returns the Hijri month array for the given Gregorian date.
+      * @param date The date
+      */
+    public static getMonthArray(date: Date) {
+        const weeks: Array<Array<Date | null>> = [];
+        const month = UmAlQuraCalendar.getMonth(date);
+        const start = UmAlQuraCalendar.startOf(UmAlQuraCalendar.startOf(date, 'month'), 'week');
+        const end = UmAlQuraCalendar.endOf(UmAlQuraCalendar.endOf(date, 'month'), 'week');
+
+        let i = 0;
+        while (start < end) {
+            const w = Math.floor(i / 7);
+            const day = new Date(start.valueOf());
+
+            weeks[w] = weeks[w] || [];
+            weeks[w].push(UmAlQuraCalendar.getMonth(day) === month ? day : null);
+            start.setDate(start.getDate() + 1);
+            i++;
+        }
+
+        return weeks;
+    }
+
+    /**
      * Returns the Gregorian date corresponding to the Hijri date starting at the specified unit of time.
      * @param date: The date
      * @param unit: The unit of time

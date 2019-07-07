@@ -112,7 +112,27 @@ describe('Date part retreival', () => {
         expect(r).toBe(10);
     });
 
-    it('startOf', () => {
+    it('getMonthArray()', () => {
+        const arr = UmAlQuraCalendar.getMonthArray(new Date(2019, 6, 3));
+        const startOfMonth = new Date(2019, 5, 4);
+
+        for (let w = 0; w < 5; w++) {
+            for (let d = 0; d < 7; d++) {
+                let expected: Date | null;
+                if ((w === 0 && d < 2) || (w === 4 && d > 3)) {
+                    expected = null;
+                } else {
+                    const increment = w * 7 + d - 2;
+                    expected = new Date(startOfMonth);
+                    expected.setDate(expected.getDate() + increment);
+                }
+
+                expect(arr[w][d]).toEqual(expected);
+            }
+        }
+    });
+
+    it('startOf()', () => {
         const d = new Date(2019, 6, 3, 14, 47, 35, 200);
         const startOfYear = UmAlQuraCalendar.startOf(d, 'year');
         const startOfMonth = UmAlQuraCalendar.startOf(d, 'month');
@@ -131,7 +151,7 @@ describe('Date part retreival', () => {
         expect(startOfSecond).toEqual(new Date(2019, 6, 3, 14, 47, 35, 0));
     });
 
-    it('endOf', () => {
+    it('endOf()', () => {
         const d = new Date(2019, 6, 3, 14, 47, 35, 200);
         const endOfYear = UmAlQuraCalendar.endOf(d, 'year');
         const endOfMonth = UmAlQuraCalendar.endOf(d, 'month');
