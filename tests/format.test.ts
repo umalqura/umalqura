@@ -1,6 +1,6 @@
 import { format } from '../src/format';
 import en from '../src/locale/en';
-import UmAlQuraCalendar from '../src/UmAlQuraCalendar';
+import UmAlQuraStatic from '../src/UmAlQuraStatic';
 
 const expects = {
     default: 'Wed Shw 30 1440 13:19:44',
@@ -26,7 +26,7 @@ describe('Formatting', () => {
 
         it('should format `' + key + '` mask', () => {
             const d = new Date(2019, 6, 3, 13, 19, 44);
-            const { hy, hm, hd } = UmAlQuraCalendar.gregorianToHijri(d);
+            const { hy, hm, hd } = UmAlQuraStatic.gregorianToHijri(d);
             const expected = expects[key];
             const actual = format(d, key, en, hy, hm, hd, 0, 0);
             expect(actual).toBe(expected);

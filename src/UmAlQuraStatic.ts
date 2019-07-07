@@ -8,14 +8,14 @@ import { en, Locale } from './locale';
 ///     ==========  ==========  ==========
 ///     Gregorian   1900/04/30  2077/11/16
 ///     UmAlQura    1318/01/01  1500/12/30
-class UmAlQuraCalendar {
+class UmAlQuraStatic {
     private static readonly maxSeconds = 9223372036854775807 / 10000000;
     private static readonly minSeconds = -9223372036854775807 / 10000000;
 
     private static readonly millisPerSecond = 1000;
-    private static readonly millisPerMinute = UmAlQuraCalendar.millisPerSecond * 60;
-    private static readonly millisPerHour = UmAlQuraCalendar.millisPerMinute * 60;
-    private static readonly millisPerDay = UmAlQuraCalendar.millisPerHour * 24;
+    private static readonly millisPerMinute = UmAlQuraStatic.millisPerSecond * 60;
+    private static readonly millisPerHour = UmAlQuraStatic.millisPerMinute * 60;
+    private static readonly millisPerDay = UmAlQuraStatic.millisPerHour * 24;
 
     private static readonly minCalendarYear = 1318;
     private static readonly maxCalendarYear = 1500;
@@ -23,17 +23,7 @@ class UmAlQuraCalendar {
     private static readonly minDate = new Date(1900, 3, 30);
     private static readonly maxDate = new Date(2077, 10, 16, 23, 59, 59, 999);
 
-    private static readonly hijriYearData = UmAlQuraCalendar._initDateMapping();
-
-    private static locale = en;
-
-    /**
-      * Sets the global locale to be used
-      * @param locale The locale
-      */
-    public static setLocale(locale: Locale) {
-        UmAlQuraCalendar.locale = locale;
-    }
+    private static readonly hijriYearData = UmAlQuraStatic._initDateMapping();
 
     /**
       * Coverts the given Hijri date to Gregorian.
@@ -42,22 +32,22 @@ class UmAlQuraCalendar {
       * @param hd The Hijri day
       */
     public static hijriToGregorian(hy: number, hm: number, hd: number) {
-        UmAlQuraCalendar._checkYearRange(hy);
-        UmAlQuraCalendar._checkMonthRange(hm);
-        UmAlQuraCalendar._checkDayRange(hd);
+        UmAlQuraStatic._checkYearRange(hy);
+        UmAlQuraStatic._checkMonthRange(hm);
+        UmAlQuraStatic._checkDayRange(hd);
 
         let nDays = hd - 1;
 
-        const index = hy - UmAlQuraCalendar.minCalendarYear;
-        let dt = UmAlQuraCalendar.hijriYearData[index].gregorianDate;
-        let b = UmAlQuraCalendar.hijriYearData[index].hijriMonthsLengthFlags;
+        const index = hy - UmAlQuraStatic.minCalendarYear;
+        let dt = UmAlQuraStatic.hijriYearData[index].gregorianDate;
+        let b = UmAlQuraStatic.hijriYearData[index].hijriMonthsLengthFlags;
 
         for (let m = 1; m < hm; m++) {
             nDays = nDays + 29 + (b & 1);
             b >>= 1;
         }
 
-        dt = UmAlQuraCalendar.addDays(dt, nDays);
+        dt = UmAlQuraStatic.addDays(dt, nDays);
 
         return {
             gy: dt.getFullYear(),
@@ -71,25 +61,25 @@ class UmAlQuraCalendar {
       * @param date The date to be converted
       */
     public static gregorianToHijri(date: Date) {
-        UmAlQuraCalendar._checkMillsRange(date.getTime());
+        UmAlQuraStatic._checkMillsRange(date.getTime());
 
         // Find the index where we should start our search by quessing the Hijri year that we will be in HijriYearInfo.
         // A Hijri year is 354 or 355 days.  Use 355 days so that we will search from a lower index.
 
-        let index = Math.trunc((date.getTime() - UmAlQuraCalendar.minDate.getTime()) / UmAlQuraCalendar.millisPerDay / 355);
+        let index = Math.trunc((date.getTime() - UmAlQuraStatic.minDate.getTime()) / UmAlQuraStatic.millisPerDay / 355);
 
         do {
-        } while (date.getTime() > UmAlQuraCalendar.hijriYearData[++index].gregorianDate.getTime());
+        } while (date.getTime() > UmAlQuraStatic.hijriYearData[++index].gregorianDate.getTime());
 
-        if (date.getTime() !== UmAlQuraCalendar.hijriYearData[index].gregorianDate.getTime()) {
+        if (date.getTime() !== UmAlQuraStatic.hijriYearData[index].gregorianDate.getTime()) {
             index--;
         }
 
-        let nDays = UmAlQuraCalendar._dayDiff(date, UmAlQuraCalendar.hijriYearData[index].gregorianDate);
-        const yh1 = index + UmAlQuraCalendar.minCalendarYear;
+        let nDays = UmAlQuraStatic._dayDiff(date, UmAlQuraStatic.hijriYearData[index].gregorianDate);
+        const yh1 = index + UmAlQuraStatic.minCalendarYear;
         let mh1 = 1;
         let dh1 = 1;
-        let b = UmAlQuraCalendar.hijriYearData[index].hijriMonthsLengthFlags;
+        let b = UmAlQuraStatic.hijriYearData[index].hijriMonthsLengthFlags;
         let daysPerThisMonth = 29 + (b & 1);
 
         while (nDays >= daysPerThisMonth) {
@@ -113,7 +103,7 @@ class UmAlQuraCalendar {
       * @param hys The Hijri years to be added
       */
     public static addYears(date: Date, hys: number) {
-        return UmAlQuraCalendar.addMonths(date, hys * 12);
+        return UmAlQuraStatic.addMonths(date, hys * 12);
     }
 
     /**
@@ -123,9 +113,9 @@ class UmAlQuraCalendar {
       */
     public static addMonths(date: Date, hms: number) {
         // Get the date in UmAlQura calendar.
-        let y = UmAlQuraCalendar._getDatePart(date, DatePart.Year);
-        let m = UmAlQuraCalendar._getDatePart(date, DatePart.Month);
-        let d = UmAlQuraCalendar._getDatePart(date, DatePart.Day);
+        let y = UmAlQuraStatic._getDatePart(date, DatePart.Year);
+        let m = UmAlQuraStatic._getDatePart(date, DatePart.Month);
+        let d = UmAlQuraStatic._getDatePart(date, DatePart.Day);
         const i = m - 1 + hms;
 
         if (i >= 0) {
@@ -137,13 +127,13 @@ class UmAlQuraCalendar {
         }
 
         if (d > 29) {
-            const days = UmAlQuraCalendar.getDaysInMonth(y, m);
+            const days = UmAlQuraStatic.getDaysInMonth(y, m);
             if (d > days) {
                 d = days;
             }
         }
 
-        return new Date(UmAlQuraCalendar._getAbsoluteDateUmAlQura(y, m, d) * UmAlQuraCalendar.millisPerDay + date.getTime() % UmAlQuraCalendar.millisPerDay);
+        return new Date(UmAlQuraStatic._getAbsoluteDateUmAlQura(y, m, d) * UmAlQuraStatic.millisPerDay + date.getTime() % UmAlQuraStatic.millisPerDay);
     }
 
     /**
@@ -152,7 +142,7 @@ class UmAlQuraCalendar {
       * @param wks The weeks to be added
       */
     public static addWeeks(date: Date, wks: number) {
-        return UmAlQuraCalendar.addDays(date, wks * 7);
+        return UmAlQuraStatic.addDays(date, wks * 7);
     }
 
     /**
@@ -171,7 +161,7 @@ class UmAlQuraCalendar {
       * @param date The date
       */
     public static getDayOfYear(date: Date) {
-        return UmAlQuraCalendar._getDatePart(date, DatePart.DayOfYear);
+        return UmAlQuraStatic._getDatePart(date, DatePart.DayOfYear);
     }
 
     /**
@@ -179,7 +169,7 @@ class UmAlQuraCalendar {
       * @param date The date
       */
     public static getDayOfMonth(date: Date) {
-        return UmAlQuraCalendar._getDatePart(date, DatePart.Day);
+        return UmAlQuraStatic._getDatePart(date, DatePart.Day);
     }
 
     /**
@@ -195,11 +185,11 @@ class UmAlQuraCalendar {
       * @param date The date
       */
     public static getWeekOfYear(date: Date) {
-        const firstDayOfYear = UmAlQuraCalendar.startOf(date, 'year').getDay();
+        const firstDayOfYear = UmAlQuraStatic.startOf(date, 'year').getDay();
         const daysToDayOfWeek = firstDayOfYear - date.getDay();
 
-        const d = UmAlQuraCalendar.addDays(date, daysToDayOfWeek);
-        return Math.ceil(UmAlQuraCalendar.getDayOfYear(d) / 7);
+        const d = UmAlQuraStatic.addDays(date, daysToDayOfWeek);
+        return Math.ceil(UmAlQuraStatic.getDayOfYear(d) / 7);
     }
 
     /**
@@ -207,10 +197,10 @@ class UmAlQuraCalendar {
       * @param hy The Hijri year
       */
     public static getDaysInYear(hy: number) {
-        UmAlQuraCalendar._checkYearRange(hy);
+        UmAlQuraStatic._checkYearRange(hy);
 
         let days = 0;
-        let b = UmAlQuraCalendar.hijriYearData[hy - UmAlQuraCalendar.minCalendarYear].hijriMonthsLengthFlags;
+        let b = UmAlQuraStatic.hijriYearData[hy - UmAlQuraStatic.minCalendarYear].hijriMonthsLengthFlags;
 
         for (let m = 1; m <= 12; m++) {
             days = days + 29 + (b & 1);
@@ -230,10 +220,10 @@ class UmAlQuraCalendar {
       * @param hm The Hijri month
       */
     public static getDaysInMonth(hy: number, hm: number) {
-        UmAlQuraCalendar._checkYearRange(hy);
-        UmAlQuraCalendar._checkMonthRange(hm);
+        UmAlQuraStatic._checkYearRange(hy);
+        UmAlQuraStatic._checkMonthRange(hm);
 
-        if ((UmAlQuraCalendar.hijriYearData[hy - UmAlQuraCalendar.minCalendarYear].hijriMonthsLengthFlags & (1 << hm - 1)) === 0) {
+        if ((UmAlQuraStatic.hijriYearData[hy - UmAlQuraStatic.minCalendarYear].hijriMonthsLengthFlags & (1 << hm - 1)) === 0) {
             return 29;
         } else {
             return 30;
@@ -245,7 +235,7 @@ class UmAlQuraCalendar {
       * @param date The date
       */
     public static getYear(date: Date) {
-        return UmAlQuraCalendar._getDatePart(date, DatePart.Year);
+        return UmAlQuraStatic._getDatePart(date, DatePart.Year);
     }
 
     /**
@@ -253,7 +243,7 @@ class UmAlQuraCalendar {
       * @param date The date
       */
     public static getMonth(date: Date) {
-        return UmAlQuraCalendar._getDatePart(date, DatePart.Month);
+        return UmAlQuraStatic._getDatePart(date, DatePart.Month);
     }
 
     /**
@@ -262,9 +252,9 @@ class UmAlQuraCalendar {
       */
     public static getMonthArray(date: Date) {
         const weeks: Array<Array<Date | null>> = [];
-        const month = UmAlQuraCalendar.getMonth(date);
-        const start = UmAlQuraCalendar.startOf(UmAlQuraCalendar.startOf(date, 'month'), 'week');
-        const end = UmAlQuraCalendar.endOf(UmAlQuraCalendar.endOf(date, 'month'), 'week');
+        const month = UmAlQuraStatic.getMonth(date);
+        const start = UmAlQuraStatic.startOf(UmAlQuraStatic.startOf(date, 'month'), 'week');
+        const end = UmAlQuraStatic.endOf(UmAlQuraStatic.endOf(date, 'month'), 'week');
 
         let i = 0;
         while (start < end) {
@@ -272,7 +262,7 @@ class UmAlQuraCalendar {
             const day = new Date(start.valueOf());
 
             weeks[w] = weeks[w] || [];
-            weeks[w].push(UmAlQuraCalendar.getMonth(day) === month ? day : null);
+            weeks[w].push(UmAlQuraStatic.getMonth(day) === month ? day : null);
             start.setDate(start.getDate() + 1);
             i++;
         }
@@ -287,16 +277,16 @@ class UmAlQuraCalendar {
      */
     public static startOf(date: Date, unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second') {
         let d = new Date(date);
-        const { hy, hm } = UmAlQuraCalendar.gregorianToHijri(d);
+        const { hy, hm } = UmAlQuraStatic.gregorianToHijri(d);
 
         switch (unit) {
             case 'year':
-                return UmAlQuraCalendar.toDate(hy, 1, 1, 0, 0, 0, 0);
+                return UmAlQuraStatic.toDate(hy, 1, 1, 0, 0, 0, 0);
             case 'month':
-                return UmAlQuraCalendar.toDate(hy, hm, 1, 0, 0, 0, 0);
+                return UmAlQuraStatic.toDate(hy, hm, 1, 0, 0, 0, 0);
             case 'week':
-                const dow = UmAlQuraCalendar.getDayOfWeek(d);
-                d = UmAlQuraCalendar.addDays(d, -dow);
+                const dow = UmAlQuraStatic.getDayOfWeek(d);
+                d = UmAlQuraStatic.addDays(d, -dow);
             case 'day':
                 d.setHours(0);
             case 'hour':
@@ -320,19 +310,19 @@ class UmAlQuraCalendar {
      */
     public static endOf(date: Date, unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second') {
         let d = new Date(date);
-        const { hy, hm } = UmAlQuraCalendar.gregorianToHijri(d);
+        const { hy, hm } = UmAlQuraStatic.gregorianToHijri(d);
         let daysInMonth;
 
         switch (unit) {
             case 'year':
-                daysInMonth = UmAlQuraCalendar.getDaysInMonth(hy, 12);
-                return UmAlQuraCalendar.toDate(hy, 12, daysInMonth, 23, 59, 59, 999);
+                daysInMonth = UmAlQuraStatic.getDaysInMonth(hy, 12);
+                return UmAlQuraStatic.toDate(hy, 12, daysInMonth, 23, 59, 59, 999);
             case 'month':
-                daysInMonth = UmAlQuraCalendar.getDaysInMonth(hy, hm);
-                return UmAlQuraCalendar.toDate(hy, hm, daysInMonth, 23, 59, 59, 999);
+                daysInMonth = UmAlQuraStatic.getDaysInMonth(hy, hm);
+                return UmAlQuraStatic.toDate(hy, hm, daysInMonth, 23, 59, 59, 999);
             case 'week':
-                const dow = UmAlQuraCalendar.getDayOfWeek(d);
-                d = UmAlQuraCalendar.addDays(d, 6 - dow);
+                const dow = UmAlQuraStatic.getDayOfWeek(d);
+                d = UmAlQuraStatic.addDays(d, 6 - dow);
             case 'day':
                 d.setHours(23);
             case 'hour':
@@ -355,7 +345,7 @@ class UmAlQuraCalendar {
       * @param hy The Hijri year
       */
     public static isLeapYear(hy: number) {
-        return UmAlQuraCalendar.getDaysInYear(hy) === 355;
+        return UmAlQuraStatic.getDaysInYear(hy) === 355;
     }
 
     /**
@@ -369,35 +359,35 @@ class UmAlQuraCalendar {
       * @param millisecond The Millisecond component
       */
     public static toDate(hy: number, hm: number, hd: number, hour: number = 0, minute: number = 0, second: number = 0, millisecond: number = 0) {
-        const daysInMonth = UmAlQuraCalendar.getDaysInMonth(hy, hm);
+        const daysInMonth = UmAlQuraStatic.getDaysInMonth(hy, hm);
 
         if (hd < 1 || hd > daysInMonth) {
             throw new Error(`Invalid value for day for the given year/month. Day must be between 1 and ${daysInMonth}.`);
         }
 
-        const lDate = UmAlQuraCalendar._getAbsoluteDateUmAlQura(hy, hm, hd);
+        const lDate = UmAlQuraStatic._getAbsoluteDateUmAlQura(hy, hm, hd);
         if (lDate < 0) {
             throw new Error('Error converting date. This is possibly a bug.');
         }
 
-        return new Date(lDate * UmAlQuraCalendar.millisPerDay + UmAlQuraCalendar._timeToMillis(hour, minute, second, millisecond));
+        return new Date(lDate * UmAlQuraStatic.millisPerDay + UmAlQuraStatic._timeToMillis(hour, minute, second, millisecond));
     }
 
     /**
       * Formats the specified Gregorian Date instance in Hijri date.
       * @param date The date
       * @param mask The format mask
-      * @param locale The locale to use. If omitted, uses the default locale or the locale set via `setLocale`
+      * @param locale The locale to use. If omitted, uses the default locale.
       */
-    public static format(date: Date, mask: string, locale?: Locale) {
-        const { hy, hm, hd } = UmAlQuraCalendar.gregorianToHijri(date);
-        return format(date, mask, locale || UmAlQuraCalendar.locale, hy, hm, hd,
-            UmAlQuraCalendar.getWeekOfYear(date),
-            UmAlQuraCalendar.getDayOfWeek(date));
+    public static format(date: Date, mask: string, locale?: string) {
+        const { hy, hm, hd } = UmAlQuraStatic.gregorianToHijri(date);
+        return format(date, mask, UmAlQuraStatic._loadLocale(locale), hy, hm, hd,
+            UmAlQuraStatic.getWeekOfYear(date),
+            UmAlQuraStatic.getDayOfWeek(date));
     }
 
     private static _getDatePart(date: Date, part: DatePart) {
-        const { hy, hm, hd } = UmAlQuraCalendar.gregorianToHijri(date);
+        const { hy, hm, hd } = UmAlQuraStatic.gregorianToHijri(date);
 
         switch (part) {
             case DatePart.Year:
@@ -407,31 +397,31 @@ class UmAlQuraCalendar {
             case DatePart.Day:
                 return hd;
             case DatePart.DayOfYear:
-                return Math.trunc(UmAlQuraCalendar._getAbsoluteDateUmAlQura(hy, hm, hd) - UmAlQuraCalendar._getAbsoluteDateUmAlQura(hy, 1, 1) + 1);
+                return Math.trunc(UmAlQuraStatic._getAbsoluteDateUmAlQura(hy, hm, hd) - UmAlQuraStatic._getAbsoluteDateUmAlQura(hy, 1, 1) + 1);
         }
     }
 
     private static _getAbsoluteDateUmAlQura(hy: number, hm: number, hd: number) {
-        const { gy, gm, gd } = UmAlQuraCalendar.hijriToGregorian(hy, hm, hd);
-        return new Date(gy, gm, gd).getTime() / UmAlQuraCalendar.millisPerDay;
+        const { gy, gm, gd } = UmAlQuraStatic.hijriToGregorian(hy, hm, hd);
+        return new Date(gy, gm, gd).getTime() / UmAlQuraStatic.millisPerDay;
     }
 
     private static _timeToMillis(hour: number, minute: number, second: number, millisecond: number) {
-        if (hour < 0 || hour >= 24 || minute < 0 || minute >= 60 || second < 0 || second >= 60 || millisecond < 0 || millisecond >= UmAlQuraCalendar.millisPerSecond) {
+        if (hour < 0 || hour >= 24 || minute < 0 || minute >= 60 || second < 0 || second >= 60 || millisecond < 0 || millisecond >= UmAlQuraStatic.millisPerSecond) {
             throw new Error('Invalid value for hour, minute, second or millisecond.');
         }
 
         const totalSeconds = hour * 3600 + minute * 60 + second;
-        if (totalSeconds > UmAlQuraCalendar.maxSeconds || totalSeconds < UmAlQuraCalendar.minSeconds) {
+        if (totalSeconds > UmAlQuraStatic.maxSeconds || totalSeconds < UmAlQuraStatic.minSeconds) {
             throw new Error('Time overflow error. This is possibly a bug.');
         }
 
-        return (totalSeconds * UmAlQuraCalendar.millisPerSecond) + millisecond;
+        return (totalSeconds * UmAlQuraStatic.millisPerSecond) + millisecond;
     }
 
     private static _checkYearRange(hy: number) {
-        if (hy < UmAlQuraCalendar.minCalendarYear || hy > UmAlQuraCalendar.maxCalendarYear) {
-            throw new Error(`Invalid value for year. Must be between ${UmAlQuraCalendar.minCalendarYear} and ${UmAlQuraCalendar.maxCalendarYear}.`);
+        if (hy < UmAlQuraStatic.minCalendarYear || hy > UmAlQuraStatic.maxCalendarYear) {
+            throw new Error(`Invalid value for year. Must be between ${UmAlQuraStatic.minCalendarYear} and ${UmAlQuraStatic.maxCalendarYear}.`);
         }
     }
 
@@ -448,13 +438,26 @@ class UmAlQuraCalendar {
     }
 
     private static _checkMillsRange(millis: number) {
-        if (millis < UmAlQuraCalendar.minDate.getTime() || millis > UmAlQuraCalendar.maxDate.getTime()) {
-            throw new Error(`Invalid value for epoch. Must be between ${UmAlQuraCalendar.minDate.getTime()} and ${UmAlQuraCalendar.maxDate.getTime()}.`);
+        if (millis < UmAlQuraStatic.minDate.getTime() || millis > UmAlQuraStatic.maxDate.getTime()) {
+            throw new Error(`Invalid value for epoch. Must be between ${UmAlQuraStatic.minDate.getTime()} and ${UmAlQuraStatic.maxDate.getTime()}.`);
         }
     }
 
     private static _dayDiff(date: Date, other: Date) {
         return (date.getTime() - other.getTime()) / (1000 * 60 * 60 * 24);
+    }
+
+    private static _loadLocale(locale?: string): Locale {
+        if (locale) {
+            try {
+                return require(`./locale/${locale}`).default;
+            } catch {
+                console.warn(`Requested locale '${locale}' could not be found, using default locale instead.`);
+                return en;
+            }
+        }
+
+        return en;
     }
 
     private static _initDateMapping() {
@@ -656,4 +659,4 @@ class UmAlQuraCalendar {
     }
 }
 
-export default UmAlQuraCalendar;
+export default UmAlQuraStatic;
