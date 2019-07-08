@@ -1,21 +1,21 @@
 {
-    "name": "@amef/hijri",
+    "name": "@amef/umalqura",
     "version": "0.0.1",
     "description": "A library to easily work with Hijri dates based on Um AlQura Calendar",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
     "typings": "./dist/esm/index.d.ts",
-    "umd": "./dist/browser/hijri.js",
-    "umd_name": "hijri",
+    "umd": "./dist/browser/umalqura.js",
+    "umd_name": "umalqura",
     "scripts": {
         "clean": "node ./node_modules/rimraf/bin.js ./dist",
         "build": "yarn run build:lint && yarn run build:esm && yarn run build:cjs && yarn run build:browser && yarn run build:uglify",
         "build:lint": "node ./node_modules/tslint/bin/tslint -c ./tslint.json -p ./tsconfig.json",
-        "build:esm": "node ./node_modules/typescript/bin/tsc --project ./tsconfig.json --module es2015 --outDir ./dist/esm -d && node ./build/process-dts.js",
+        "build:esm": "node ./node_modules/typescript/bin/tsc --project ./tsconfig.json --module es2015 --outDir ./dist/esm -d",
         "build:cjs": "node ./node_modules/typescript/bin/tsc --project ./tsconfig.json --module commonjs --outDir ./dist/cjs",
         "build:browser": "node ./node_modules/webpack-cli/bin/cli.js",
         "build:uglify": "yarn run build:uglify:browser",
-        "build:uglify:browser": "node ./node_modules/uglify-js/bin/uglifyjs --source-map \"url='hijri.min.js.map',content='./dist/browser/hijri.js.map'\" --comments -o ./dist/browser/hijri.min.js ./dist/browser/hijri.js",
+        "build:uglify:browser": "node ./node_modules/uglify-js/bin/uglifyjs --source-map \"url='umalqura.min.js.map',content='./dist/browser/umalqura.js.map'\" --comments -o ./dist/browser/umalqura.min.js ./dist/browser/umalqura.js",
         "prepack": "node ./build/embed-version.js",
         "test": "node ./node_modules/jest/bin/jest.js",
         "test:coverage": "node ./node_modules/jest/bin/jest.js --coverage"
@@ -39,7 +39,8 @@
         "src/**/*"
     ],
     "keywords": [
-        "hijri"
+        "hijri",
+        "umalqura"
     ],
     "author": "Alaa Masoud",
     "license": "MIT"

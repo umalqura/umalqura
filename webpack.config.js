@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const pkg = require(path.resolve(__dirname, 'package.json'));
-const browserBaseName = 'hijri';
+const browserBaseName = pkg.umd_name;
 
 module.exports = {
     entry: path.resolve(__dirname, 'src', 'index.ts'),
@@ -29,31 +29,13 @@ module.exports = {
     output: {
         filename: `${browserBaseName}.js`,
         path: path.resolve(__dirname, 'dist', 'browser'),
-        library: {
-            root: pkg.umd_name.split('.'),
-            amd: pkg.umd_name,
-        },
+        library: pkg.umd_name,
         libraryTarget: 'umd',
+        libraryExport: 'default'
     },
     plugins: [
         new webpack.SourceMapDevToolPlugin({
             filename: `${browserBaseName}.js.map`,
-            moduleFilenameTemplate(info) {
-                let resourcePath = info.resourcePath;
-
-                // Clean up the source map urls.
-                while (resourcePath.startsWith('./') || resourcePath.startsWith('../')) {
-                    if (resourcePath.startsWith('./')) {
-                        resourcePath = resourcePath.substring(2);
-                    } else {
-                        resourcePath = resourcePath.substring(3);
-                    }
-                }
-
-                // We embed the sources so we can falsify the URLs a little, they just
-                // need to be identifiers that can be viewed in the browser.
-                return `webpack://${pkg.umd_name}/${resourcePath}`;
-            }
         }),
     ],
 };
