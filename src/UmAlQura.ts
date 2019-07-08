@@ -94,7 +94,7 @@ class UmAlQura {
     }
 
     /**
-     * Adds the specified amount of `unit` to the current of this instance.
+     * Adds the specified amount of `unit` to the current date of this instance.
      * @param {number} value The amount of units to be added
      * @param {('year' | 'month' | 'week' | 'day')} unit The unit of time
      * @returns Reference to this instance.
@@ -119,7 +119,7 @@ class UmAlQura {
     }
 
     /**
-     * Subtracts the specified amount of `unit` from the current of this instance.
+     * Subtracts the specified amount of `unit` from the current date of this instance.
      * @param {number} value The amount of units to be subtracted
      * @param {('year' | 'month' | 'week' | 'day')} unit The unit of time
      * @returns Reference to this instance.
