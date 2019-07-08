@@ -1,7 +1,7 @@
 {
     "name": "@amef/umalqura",
     "version": "0.0.1",
-    "description": "A library to easily work with Hijri dates based on Um AlQura Calendar",
+    "description": "Zero dependancy library to easily work with Hijri dates based on Um AlQura Calendar",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
     "typings": "./dist/esm/index.d.ts",
