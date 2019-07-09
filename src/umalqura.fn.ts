@@ -1,4 +1,6 @@
+import { ar, en } from './locale';
 import UmAlQura from './UmAlQura';
+import UmAlQuraStatic from './UmAlQuraStatic';
 
 /**
  * Initializes UmAlQura instance using current date and time.
@@ -27,5 +29,7 @@ function umalqura(dateOrHy?: Date | number, hm?: number, hd?: number): UmAlQura 
 }
 
 umalqura.VERSION = "0.0.0-DEV_BUILD";
+umalqura.locales = { ar, en };
+umalqura.$ = UmAlQuraStatic;
 
 export default umalqura;
