@@ -242,19 +242,19 @@ declare namespace umalqura {
          */
         constructor(hy: number, hm: number, hd: number);
         /**
-         * Adds the specified amount of `unit` to the current date of this instance.
+         * Adds the specified amount of `unit` to the current date and returns a new instance.
          * @param {number} value The amount of units to be added
          * @param {('year' | 'month' | 'week' | 'day')} unit The unit of time
          * @returns Reference to this instance.
          */
-        add(value: number, unit: 'year' | 'month' | 'week' | 'day'): this;
+        add(value: number, unit: 'year' | 'month' | 'week' | 'day'): UmAlQura;
         /**
-         * Subtracts the specified amount of `unit` from the current date of this instance.
+         * Subtracts the specified amount of `unit` from the current date and returns a new instance.
          * @param {number} value The amount of units to be subtracted
          * @param {('year' | 'month' | 'week' | 'day')} unit The unit of time
          * @returns Reference to this instance.
          */
-        subtract(value: number, unit: 'year' | 'month' | 'week' | 'day'): this;
+        subtract(value: number, unit: 'year' | 'month' | 'week' | 'day'): UmAlQura;
         /**
          * Returns the Gregorian date corresponding to the Hijri date of this instance starting at the specified unit of time.
          * @param {('year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second')} unit The unit of time

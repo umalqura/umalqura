@@ -55,14 +55,14 @@ describe('Methods', () => {
         const d = new Date(2019, 6, 3);
         const uq = new UmAlQura(d);
 
-        expect(new UmAlQura(d).add(5, 'year').date).toEqual(UmAlQuraStatic.addYears(d, 5));
-        expect(new UmAlQura(d).add(5, 'month').date).toEqual(UmAlQuraStatic.addMonths(d, 5));
-        expect(new UmAlQura(d).add(5, 'week').date).toEqual(UmAlQuraStatic.addWeeks(d, 5));
-        expect(new UmAlQura(d).add(5, 'day').date).toEqual(UmAlQuraStatic.addDays(d, 5));
-        expect(new UmAlQura(d).subtract(5, 'year').date).toEqual(UmAlQuraStatic.addYears(d, -5));
-        expect(new UmAlQura(d).subtract(5, 'month').date).toEqual(UmAlQuraStatic.addMonths(d, -5));
-        expect(new UmAlQura(d).subtract(5, 'week').date).toEqual(UmAlQuraStatic.addWeeks(d, -5));
-        expect(new UmAlQura(d).subtract(5, 'day').date).toEqual(UmAlQuraStatic.addDays(d, -5));
+        expect(uq.add(5, 'year').date).toEqual(UmAlQuraStatic.addYears(d, 5));
+        expect(uq.add(5, 'month').date).toEqual(UmAlQuraStatic.addMonths(d, 5));
+        expect(uq.add(5, 'week').date).toEqual(UmAlQuraStatic.addWeeks(d, 5));
+        expect(uq.add(5, 'day').date).toEqual(UmAlQuraStatic.addDays(d, 5));
+        expect(uq.subtract(5, 'year').date).toEqual(UmAlQuraStatic.addYears(d, -5));
+        expect(uq.subtract(5, 'month').date).toEqual(UmAlQuraStatic.addMonths(d, -5));
+        expect(uq.subtract(5, 'week').date).toEqual(UmAlQuraStatic.addWeeks(d, -5));
+        expect(uq.subtract(5, 'day').date).toEqual(UmAlQuraStatic.addDays(d, -5));
 
         expect(uq.startOf('year')).toEqual(UmAlQuraStatic.startOf(d, 'year'));
         expect(uq.startOf('month')).toEqual(UmAlQuraStatic.startOf(d, 'month'));
@@ -83,10 +83,30 @@ describe('Methods', () => {
     });
 });
 
+describe('Immutability', () => {
+    it('Manipulation methods are immutable', () => {
+        const d = new Date(2019, 6, 3);
+        const uq = new UmAlQura(d);
+
+        let newUq = uq.add(1, 'year');
+        expect(newUq === uq).toBeFalsy();
+
+        newUq = uq.subtract(1, 'year');
+        expect(newUq === uq).toBeFalsy();
+    });
+});
+
 describe('Formatting', () => {
     it('Uses the supplied locale if present', () => {
         const d = new Date(2019, 6, 3);
         const locale = 'ar';
         expect(new UmAlQura(d).format('dd MM yyyy', locale)).toBe(UmAlQuraStatic.format(d, 'dd MM yyyy', locale));
     });
+});
+
+describe('Input validation', () => {
+    // @ts-ignore
+    it('add() throws for invalid unit', () => expect(() => new UmAlQura().add(1, 'invalid')).toThrow('Invalid value for `unit`'));
+    // @ts-ignore
+    it('subtract() throws for invalid unit', () => expect(() => new UmAlQura().subtract(1, 'invalid')).toThrow('Invalid value for `unit`'));
 });

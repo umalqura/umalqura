@@ -84,7 +84,7 @@ class UmAlQura {
     }
 
     /**
-     * Adds the specified amount of `unit` to the current date of this instance.
+     * Adds the specified amount of `unit` to the current date and returns a new instance.
      * @param {number} value The amount of units to be added
      * @param {('year' | 'month' | 'week' | 'day')} unit The unit of time
      * @returns Reference to this instance.
@@ -92,24 +92,20 @@ class UmAlQura {
     public add(value: number, unit: 'year' | 'month' | 'week' | 'day') {
         switch (unit) {
             case 'year':
-                this.setDate(UmAlQuraStatic.addYears(this.date, value));
-                break;
+                return new UmAlQura(UmAlQuraStatic.addYears(this.date, value));
             case 'month':
-                this.setDate(UmAlQuraStatic.addMonths(this.date, value));
-                break;
+                return new UmAlQura(UmAlQuraStatic.addMonths(this.date, value));
             case 'week':
-                this.setDate(UmAlQuraStatic.addWeeks(this.date, value));
-                break;
+                return new UmAlQura(UmAlQuraStatic.addWeeks(this.date, value));
             case 'day':
-                this.setDate(UmAlQuraStatic.addDays(this.date, value));
-                break;
+                return new UmAlQura(UmAlQuraStatic.addDays(this.date, value));
+            default:
+                throw new Error('Invalid value for `unit`');
         }
-
-        return this;
     }
 
     /**
-     * Subtracts the specified amount of `unit` from the current date of this instance.
+     * Subtracts the specified amount of `unit` from the current date and returns a new instance.
      * @param {number} value The amount of units to be subtracted
      * @param {('year' | 'month' | 'week' | 'day')} unit The unit of time
      * @returns Reference to this instance.
