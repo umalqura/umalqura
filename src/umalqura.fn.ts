@@ -34,7 +34,6 @@ umalqura.$ = UmAlQuraStatic;
 /**
  * Returns the globally set locale.
  */
-// tslint:disable-next-line:no-string-literal
 umalqura.locale = () => UmAlQuraStatic['locale'] as Locale;
 /**
   * Sets global locale to be used for formatting.
