@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Tajawal|Roboto&display=swap" rel="stylesheet">
+    <link href="ar-font.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            background: #d84315;
+            color: white;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .col {
+            flex: 50%;
+        }
+
+        div[id^="ar-"] {
+            font-family: DroidArabicKufiRegular, 'Tajawal', sans-serif;
+            direction: rtl;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center">Make sure to run <code>yarn build</code> first.</h1>
+        <div class="header">default</div>
+        <div class="row">
+            <div id="en-default" class="col"></div>
+            <div id="ar-default" class="col"></div>
+        </div>
+
+        <div class="header">shortDate</div>
+        <div class="row">
+            <div id="en-shortDate" class="col"></div>
+            <div id="ar-shortDate" class="col"></div>
+        </div>
+
+        <div class="header">mediumDate</div>
+        <div class="row">
+            <div id="en-mediumDate" class="col"></div>
+            <div id="ar-mediumDate" class="col"></div>
+        </div>
+
+        <div class="header">longDate</div>
+        <div class="row">
+            <div id="en-longDate" class="col"></div>
+            <div id="ar-longDate" class="col"></div>
+        </div>
+
+        <div class="header">fullDate</div>
+        <div class="row">
+            <div id="en-fullDate" class="col"></div>
+            <div id="ar-fullDate" class="col"></div>
+        </div>
+
+        <div class="header">shortTime</div>
+        <div class="row">
+            <div id="en-shortTime" class="col"></div>
+            <div id="ar-shortTime" class="col"></div>
+        </div>
+
+        <div class="header">mediumTime</div>
+        <div class="row">
+            <div id="en-mediumTime" class="col"></div>
+            <div id="ar-mediumTime" class="col"></div>
+        </div>
+
+        <div class="header">longTime</div>
+        <div class="row">
+            <div id="en-longTime" class="col"></div>
+            <div id="ar-longTime" class="col"></div>
+        </div>
+    </div>
+
+    <script src="../dist/browser/umalqura.js"></script>
+    <script>
+        (function () {
+            const masks = [
+                'default',
+                'shortDate',
+                'mediumDate',
+                'longDate',
+                'fullDate',
+                'shortTime',
+                'mediumTime',
+                'longTime',
+            ];
+
+            render();
+            setInterval(render, 1000);
+
+            function render() {
+                const uq = umalqura();
+
+                masks.forEach(m => document.getElementById(`en-${m}`).innerHTML = uq.format(m));
+                masks.forEach(m => document.getElementById(`ar-${m}`).innerHTML = uq.format(m, 'ar'));
+            }
+        })();
+    </script>
+</body>
+
+</html>
