@@ -374,9 +374,6 @@ class UmAlQuraStatic {
         }
 
         const lDate = UmAlQuraStatic._getAbsoluteDateUmAlQura(hy, hm, hd);
-        if (lDate < 0) {
-            throw new Error('Error converting date. This is possibly a bug.');
-        }
 
         return new Date(lDate * UmAlQuraStatic.millisPerDay + UmAlQuraStatic._timeToMillis(hour, minute, second, millisecond));
     }
