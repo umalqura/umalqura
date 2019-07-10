@@ -4,14 +4,14 @@
     "description": "Zero dependancy library to easily work with Hijri dates based on Um AlQura Calendar",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
-    "typings": "./dist/esm/index.d.ts",
+    "typings": "index.d.ts",
     "umd": "./dist/browser/umalqura.js",
     "umd_name": "umalqura",
     "scripts": {
         "clean": "node ./node_modules/rimraf/bin.js ./dist",
         "build": "yarn run build:lint && yarn run build:esm && yarn run build:cjs && yarn run build:browser && yarn run build:uglify",
         "build:lint": "node ./node_modules/tslint/bin/tslint -c ./tslint.json -p ./tsconfig.json",
-        "build:esm": "node ./node_modules/typescript/bin/tsc -p ./tsconfig.json --module es2015 --outDir ./dist/esm -d",
+        "build:esm": "node ./node_modules/typescript/bin/tsc -p ./tsconfig.json --module es2015 --outDir ./dist/esm",
         "build:cjs": "node ./node_modules/typescript/bin/tsc -p ./tsconfig.json --module commonjs --outDir ./dist/cjs",
         "build:browser": "node ./node_modules/webpack-cli/bin/cli.js",
         "build:uglify": "yarn run build:uglify:browser",
@@ -36,7 +36,8 @@
     },
     "files": [
         "dist/**/*",
-        "src/**/*"
+        "src/**/*",
+        "index.d.ts"
     ],
     "keywords": [
         "hijri",

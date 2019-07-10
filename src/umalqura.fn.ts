@@ -1,4 +1,3 @@
-import { Locale } from './locale';
 import UmAlQura from './UmAlQura';
 import UmAlQuraStatic from './UmAlQuraStatic';
 
@@ -39,7 +38,7 @@ umalqura.$ = UmAlQuraStatic;
 /**
  * Returns the globally set locale.
  */
-umalqura.locale = () => UmAlQuraStatic['locale'] as Locale;
+umalqura.locale = () => UmAlQuraStatic['locale'];
 /**
   * Sets global locale to be used for formatting.
   * @param locale The locale
