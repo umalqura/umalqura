@@ -89,3 +89,11 @@ describe('Methods', () => {
         expect(uq.format('dd MM yyyy')).toBe(UmAlQuraStatic.format(d, 'dd MM yyyy', uq.locale));
     });
 });
+
+describe('Formatting', () => {
+    it('Uses the supplied locale if present', () => {
+        const d = new Date(2019, 6, 3);
+        const locale = 'ar';
+        expect(new UmAlQura(d).format('dd MM yyyy', locale)).toBe(UmAlQuraStatic.format(d, 'dd MM yyyy', locale));
+    });
+});

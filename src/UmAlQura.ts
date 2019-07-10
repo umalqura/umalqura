@@ -145,11 +145,12 @@ class UmAlQura {
     }
 
     /**
-     * Formats this instance in Hijri date. Uses the locale set via `locale` or the default locale.
+     * Formats this instance in Hijri date.
      * @param {string} mask The mask
+     * @param {string} locale The locale to use. If omitted, uses  the locale set via `locale` or the default locale.
      */
-    public format(mask: string) {
-        return UmAlQuraStatic.format(this.date, mask, this.locale);
+    public format(mask: string, locale?: string) {
+        return UmAlQuraStatic.format(this.date, mask, locale || this.locale);
     }
 
     private setDate(date: Date) {
