@@ -1,5 +1,5 @@
 import ar from './ar';
 import en from './en';
-import Locale from './interfaces';
+import Locale from './Locale';
 
 export { ar, en, Locale };

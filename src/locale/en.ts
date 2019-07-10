@@ -1,4 +1,4 @@
-import Locale from './interfaces';
+import Locale from './Locale';
 
 const en: Locale = {
     name: 'en',
