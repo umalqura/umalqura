@@ -48,13 +48,6 @@ describe('Properties', () => {
         expect(uq.isLeapYear).toBe(UmAlQuraStatic.isLeapYear(uq.hy));
         expect(uq.monthArray).toEqual(UmAlQuraStatic.getMonthArray(d));
     });
-
-    it('sets locale', () => {
-        const uq = new UmAlQura();
-        uq.locale = 'my-locale';
-
-        expect(uq.locale).toBe('my-locale');
-    });
 });
 
 describe('Methods', () => {
@@ -86,7 +79,7 @@ describe('Methods', () => {
         expect(uq.endOf('minute')).toEqual(UmAlQuraStatic.endOf(d, 'minute'));
         expect(uq.endOf('second')).toEqual(UmAlQuraStatic.endOf(d, 'second'));
 
-        expect(uq.format('dd MM yyyy')).toBe(UmAlQuraStatic.format(d, 'dd MM yyyy', uq.locale));
+        expect(uq.format('dd MM yyyy')).toBe(UmAlQuraStatic.format(d, 'dd MM yyyy'));
     });
 });
 

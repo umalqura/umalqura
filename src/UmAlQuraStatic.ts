@@ -25,6 +25,8 @@ class UmAlQuraStatic {
 
     private static readonly hijriYearData = UmAlQuraStatic._initDateMapping();
 
+    private static locale: Locale = en;
+
     /**
       * Coverts the given Hijri date to Gregorian.
       * @param hy The Hijri year
@@ -377,13 +379,32 @@ class UmAlQuraStatic {
       * Formats the specified Gregorian Date instance in Hijri date.
       * @param date The date
       * @param mask The format mask
-      * @param locale The locale to use. If omitted, uses the default locale.
+      * @param locale The locale to use. If omitted, uses the globally set locale or the default locale.
       */
     public static format(date: Date, mask: string, locale?: string) {
         const { hy, hm, hd } = UmAlQuraStatic.gregorianToHijri(date);
-        return format(date, mask, UmAlQuraStatic._loadLocale(locale), hy, hm, hd,
+        return format(date, mask,
+            locale ? UmAlQuraStatic._loadLocale(locale) : UmAlQuraStatic.locale,
+            hy, hm, hd,
             UmAlQuraStatic.getWeekOfYear(date),
             UmAlQuraStatic.getDayOfWeek(date));
+    }
+
+    /**
+      * Sets global locale to be used for formatting.
+      * @param locale The locale
+      */
+    public static setLocale(locale: string) {
+        UmAlQuraStatic.locale = UmAlQuraStatic._loadLocale(locale);
+    }
+
+    private static _loadLocale(locale: string): Locale {
+        try {
+            return require(`./locale/${locale}`).default;
+        } catch {
+            console.warn(`Requested locale '${locale}' could not be found, using default locale instead.`);
+            return en;
+        }
     }
 
     private static _getDatePart(date: Date, part: DatePart) {
@@ -445,19 +466,6 @@ class UmAlQuraStatic {
 
     private static _dayDiff(date: Date, other: Date) {
         return (date.getTime() - other.getTime()) / (1000 * 60 * 60 * 24);
-    }
-
-    private static _loadLocale(locale?: string): Locale {
-        if (locale) {
-            try {
-                return require(`./locale/${locale}`).default;
-            } catch {
-                console.warn(`Requested locale '${locale}' could not be found, using default locale instead.`);
-                return en;
-            }
-        }
-
-        return en;
     }
 
     private static _initDateMapping() {

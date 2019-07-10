@@ -1,20 +1,10 @@
 import UmAlQuraStatic from './UmAlQuraStatic';
 
 class UmAlQura {
-    private _locale = 'en';
     private _date = new Date(0, 0, 0);
     private _hy = 0;
     private _hm = 0;
     private _hd = 0;
-
-    /**
-     * Sets the locale to be used for formatting.
-     */
-    public set locale(locale: string) { this._locale = locale; }
-    /**
-     * Returns the locale for this instance.
-     */
-    public get locale() { return this._locale; }
 
     /**
      * Returns the `Date` object of this instance.
@@ -150,7 +140,8 @@ class UmAlQura {
      * @param {string} locale The locale to use. If omitted, uses  the locale set via `locale` or the default locale.
      */
     public format(mask: string, locale?: string) {
-        return UmAlQuraStatic.format(this.date, mask, locale || this.locale);
+        // tslint:disable-next-line:no-string-literal
+        return UmAlQuraStatic.format(this.date, mask, locale || UmAlQuraStatic['locale'].name);
     }
 
     private setDate(date: Date) {

@@ -1,6 +1,14 @@
 import umalqura from '../src/umalqura.fn';
 import UmAlQuraStatic from '../src/UmAlQuraStatic';
 
+describe('Locales', () => {
+    it('locale() returns the globally set locale', () => {
+        expect(umalqura.locale().name).toBe('en');
+        umalqura.setLocale('ar');
+        expect(umalqura.locale().name).toBe('ar');
+    });
+});
+
 describe('Initializer', () => {
     it('no params - Initializes using current date', () => {
         const now = new Date();

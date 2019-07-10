@@ -1,4 +1,4 @@
-import { ar, en } from './locale';
+import { Locale } from './locale';
 import UmAlQura from './UmAlQura';
 import UmAlQuraStatic from './UmAlQuraStatic';
 
@@ -29,7 +29,17 @@ function umalqura(dateOrHy?: Date | number, hm?: number, hd?: number): UmAlQura 
 }
 
 umalqura.VERSION = "0.0.0-DEV_BUILD";
-umalqura.locales = { ar, en };
 umalqura.$ = UmAlQuraStatic;
+
+/**
+ * Returns the globally set locale.
+ */
+// tslint:disable-next-line:no-string-literal
+umalqura.locale = () => UmAlQuraStatic['locale'] as Locale;
+/**
+  * Sets global locale to be used for formatting.
+  * @param locale The locale
+  */
+umalqura.setLocale = UmAlQuraStatic.setLocale;
 
 export default umalqura;

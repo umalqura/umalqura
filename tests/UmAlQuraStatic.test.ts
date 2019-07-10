@@ -208,6 +208,14 @@ describe('Formatting', () => {
     });
 });
 
+describe('Locales', () => {
+    it('Can set global locale and is used for formatting', () => {
+        UmAlQuraStatic.setLocale('ar');
+        const f = UmAlQuraStatic.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy');
+        expect(f).toBe('٣٠/١٠/١٤٤٠');
+    });
+});
+
 describe('Input validation', () => {
     it('hijriToGregorian() throws for out of range year', () => {
         expect(() => UmAlQuraStatic.hijriToGregorian(1300, 1, 1)).toThrow('Invalid value for year. Must be between 1318 and 1500.');
