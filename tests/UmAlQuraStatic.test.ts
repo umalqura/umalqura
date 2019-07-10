@@ -1,5 +1,10 @@
 import UmAlQuraStatic from '../src/UmAlQuraStatic';
 
+describe('Supported calendar range', () => {
+    it('Minimum supported is 1318', () => expect(UmAlQuraStatic.minCalendarYear).toBe(1318));
+    it('Maximum supported is 1500', () => expect(UmAlQuraStatic.maxCalendarYear).toBe(1500));
+});
+
 describe('Date conversion', () => {
     it('gregorianToHijri() - direct map match', () => {
         const d = new Date(1901, 3, 19);

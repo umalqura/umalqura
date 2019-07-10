@@ -36,6 +36,14 @@ declare namespace umalqura {
 
     class UmAlQuraStatic {
         /**
+         * The minimum supported Hijri calendar year.
+         */
+        static readonly minCalendarYear = 1318;
+        /**
+         * The maximum supported Hijri calendar year.
+         */
+        static readonly maxCalendarYear = 1500;
+        /**
           * Coverts the given Hijri date to Gregorian.
           * @param hy The Hijri year
           * @param hm The Hijri month

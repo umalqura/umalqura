@@ -17,15 +17,21 @@ class UmAlQuraStatic {
     private static readonly millisPerHour = UmAlQuraStatic.millisPerMinute * 60;
     private static readonly millisPerDay = UmAlQuraStatic.millisPerHour * 24;
 
-    private static readonly minCalendarYear = 1318;
-    private static readonly maxCalendarYear = 1500;
-
     private static readonly minDate = new Date(1900, 3, 30);
     private static readonly maxDate = new Date(2077, 10, 16, 23, 59, 59, 999);
 
     private static readonly hijriYearData = UmAlQuraStatic._initDateMapping();
 
     private static locale: Locale = en;
+
+    /**
+     * The minimum supported Hijri calendar year.
+     */
+    public static readonly minCalendarYear = 1318;
+    /**
+     * The maximum supported Hijri calendar year.
+     */
+    public static readonly maxCalendarYear = 1500;
 
     /**
       * Coverts the given Hijri date to Gregorian.
