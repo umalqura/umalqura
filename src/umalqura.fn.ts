@@ -28,9 +28,14 @@ function umalqura(dateOrHy?: Date | number, hm?: number, hd?: number): UmAlQura 
     }
 }
 
+/**
+ * Returns library version.
+ */
 umalqura.VERSION = "0.0.0-DEV_BUILD";
+/**
+ * Returns a class which exposes static Hijri related functions.
+ */
 umalqura.$ = UmAlQuraStatic;
-
 /**
  * Returns the globally set locale.
  */
