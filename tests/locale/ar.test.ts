@@ -3,6 +3,9 @@ import ar from '../../src/locale/ar';
 const l = ar;
 
 describe('Arabic locale test', () => {
+    it('name', () => expect(l.name).toBe('ar'));
+    it('rtl', () => expect(l.rtl).toBeTruthy());
+
     it('dayNamesShort', () => {
         expect(l.dayNamesShort).toEqual(['ح', 'ن', 'ث', 'ر', 'خ', 'ج', 'س']);
     });

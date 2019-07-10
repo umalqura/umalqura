@@ -3,6 +3,8 @@ import en from '../../src/locale/en';
 const l = en;
 
 describe('English locale test', () => {
+    it('name', () => expect(l.name).toBe('en'));
+
     it('dayNamesShort', () => {
         expect(l.dayNamesShort).toEqual(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
     });

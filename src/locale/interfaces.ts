@@ -10,6 +10,8 @@ interface Mask {
 }
 
 interface Locale {
+    name: string;
+    rtl?: boolean;
     dayNamesShort: string[];
     dayNames: string[];
     monthNamesShort: string[];

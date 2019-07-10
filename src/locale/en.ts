@@ -1,6 +1,7 @@
 import Locale from './interfaces';
 
 const en: Locale = {
+    name: 'en',
     dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     monthNamesShort: ['Muh', 'Ṣaf', 'Rab-I', 'Rab-II', 'Jum-I', 'Jum-II', 'Raj', 'Sha', 'Ram', 'Shw', 'Dhū-Q', 'Dhū-Ḥ'],
