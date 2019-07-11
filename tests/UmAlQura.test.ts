@@ -68,10 +68,18 @@ describe('Methods', () => {
         expect(uq.add(5, 'month').date).toEqual(UmAlQuraStatic.addMonths(d, 5));
         expect(uq.add(5, 'week').date).toEqual(UmAlQuraStatic.addWeeks(d, 5));
         expect(uq.add(5, 'day').date).toEqual(UmAlQuraStatic.addDays(d, 5));
+        expect(uq.add(5, 'hour').date).toEqual(UmAlQuraStatic.addTime(d, 5, 'hour'));
+        expect(uq.add(5, 'minute').date).toEqual(UmAlQuraStatic.addTime(d, 5, 'minute'));
+        expect(uq.add(5, 'second').date).toEqual(UmAlQuraStatic.addTime(d, 5, 'second'));
+        expect(uq.add(5, 'millisecond').date).toEqual(UmAlQuraStatic.addTime(d, 5, 'millisecond'));
         expect(uq.subtract(5, 'year').date).toEqual(UmAlQuraStatic.addYears(d, -5));
         expect(uq.subtract(5, 'month').date).toEqual(UmAlQuraStatic.addMonths(d, -5));
         expect(uq.subtract(5, 'week').date).toEqual(UmAlQuraStatic.addWeeks(d, -5));
         expect(uq.subtract(5, 'day').date).toEqual(UmAlQuraStatic.addDays(d, -5));
+        expect(uq.subtract(5, 'hour').date).toEqual(UmAlQuraStatic.addTime(d, -5, 'hour'));
+        expect(uq.subtract(5, 'minute').date).toEqual(UmAlQuraStatic.addTime(d, -5, 'minute'));
+        expect(uq.subtract(5, 'second').date).toEqual(UmAlQuraStatic.addTime(d, -5, 'second'));
+        expect(uq.subtract(5, 'millisecond').date).toEqual(UmAlQuraStatic.addTime(d, -5, 'millisecond'));
 
         expect(uq.startOf('year').date).toEqual(UmAlQuraStatic.startOf(d, 'year'));
         expect(uq.startOf('month').date).toEqual(UmAlQuraStatic.startOf(d, 'month'));

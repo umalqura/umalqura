@@ -1,5 +1,5 @@
 import UmAlQuraStatic from './UmAlQuraStatic';
-import { UnitOfDate, UnitOfDateTime, UnitOfDateTimeMs } from './units';
+import { UnitOfTime, UnitOfTimeMs } from './units';
 
 class UmAlQura {
     private _date = new Date(0, 0, 0);
@@ -91,10 +91,10 @@ class UmAlQura {
     /**
      * Adds the specified amount of `unit` to the current date and returns a new instance.
      * @param {number} value The amount of units to be added
-     * @param {UnitOfDate} unit The unit of time
+     * @param {UnitOfTimeMs} unit The unit of time
      * @returns Reference to this instance.
      */
-    public add(value: number, unit: UnitOfDate) {
+    public add(value: number, unit: UnitOfTimeMs) {
         switch (unit) {
             case 'year':
                 return new UmAlQura(UmAlQuraStatic.addYears(this.date, value));
@@ -104,6 +104,11 @@ class UmAlQura {
                 return new UmAlQura(UmAlQuraStatic.addWeeks(this.date, value));
             case 'day':
                 return new UmAlQura(UmAlQuraStatic.addDays(this.date, value));
+            case 'hour':
+            case 'minute':
+            case 'second':
+            case 'millisecond':
+                return new UmAlQura(UmAlQuraStatic.addTime(this.date, value, unit));
             default:
                 throw new Error('Invalid value for `unit`');
         }
@@ -112,26 +117,26 @@ class UmAlQura {
     /**
      * Subtracts the specified amount of `unit` from the current date and returns a new instance.
      * @param {number} value The amount of units to be subtracted
-     * @param {UnitOfDate} unit The unit of time
+     * @param {UnitOfTimeMs} unit The unit of time
      * @returns Reference to this instance.
      */
-    public subtract(value: number, unit: UnitOfDate) {
+    public subtract(value: number, unit: UnitOfTimeMs) {
         return this.add(value * -1, unit);
     }
 
     /**
      * Returns a new instance having the Hijri date of this instance starting at the specified unit of time.
-     * @param {UnitOfDateTime} unit The unit of time
+     * @param {UnitOfTime} unit The unit of time
      */
-    public startOf(unit: UnitOfDateTime) {
+    public startOf(unit: UnitOfTime) {
         return new UmAlQura(UmAlQuraStatic.startOf(this.date, unit));
     }
 
     /**
      * Returns a new instance having the Hijri date of this instance ending at the specified unit of time.
-     * @param {UnitOfDateTime} unit The unit of time
+     * @param {UnitOfTime} unit The unit of time
      */
-    public endOf(unit: UnitOfDateTime) {
+    public endOf(unit: UnitOfTime) {
         return new UmAlQura(UmAlQuraStatic.endOf(this.date, unit));
     }
 

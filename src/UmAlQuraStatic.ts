@@ -2,7 +2,7 @@ import DateMapping from './DateMapping';
 import DatePart from './DatePart';
 import { format } from './format';
 import { ar, en, Locale } from './locale';
-import { UnitOfDateTime } from './units';
+import { UnitOfTime } from './units';
 
 /// Calendar support range:
 ///     Calendar    Minimum     Maximum
@@ -38,11 +38,11 @@ class UmAlQuraStatic {
     public static readonly maxCalendarYear = 1500;
 
     /**
-      * Coverts the given Hijri date to Gregorian.
-      * @param hy The Hijri year
-      * @param hm The Hijri month
-      * @param hd The Hijri day
-      */
+     * Coverts the given Hijri date to Gregorian.
+     * @param hy The Hijri year
+     * @param hm The Hijri month
+     * @param hd The Hijri day
+     */
     public static hijriToGregorian(hy: number, hm: number, hd: number) {
         this._checkYearRange(hy);
         this._checkMonthRange(hm);
@@ -69,9 +69,9 @@ class UmAlQuraStatic {
     }
 
     /**
-      * Coverts the given Gregorian date to Hijri year, month and day.
-      * @param date The date to be converted
-      */
+     * Coverts the given Gregorian date to Hijri year, month and day.
+     * @param date The date to be converted
+     */
     public static gregorianToHijri(date: Date) {
         this._checkMillsRange(date.getTime());
 
@@ -110,19 +110,19 @@ class UmAlQuraStatic {
     }
 
     /**
-      * Adds the specified amount of Hijri years to the given Gregorian date.
-      * @param date The date
-      * @param hys The Hijri years to be added
-      */
+     * Adds the specified amount of Hijri years to the given Gregorian date.
+     * @param date The date
+     * @param hys The Hijri years to be added
+     */
     public static addYears(date: Date, hys: number) {
         return this.addMonths(date, hys * 12);
     }
 
     /**
-      * Adds the specified amount of Hijri months to the given Gregorian date.
-      * @param date The date
-      * @param hms The Hijri months to be added
-      */
+     * Adds the specified amount of Hijri months to the given Gregorian date.
+     * @param date The date
+     * @param hms The Hijri months to be added
+     */
     public static addMonths(date: Date, hms: number) {
         // Get the date in UmAlQura calendar.
         let y = this._getDatePart(date, DatePart.Year);
@@ -149,19 +149,19 @@ class UmAlQuraStatic {
     }
 
     /**
-      * Adds the specified amount of weeks to the given Gregorian date.
-      * @param date The date
-      * @param wks The weeks to be added
-      */
+     * Adds the specified amount of weeks to the given Gregorian date.
+     * @param date The date
+     * @param wks The weeks to be added
+     */
     public static addWeeks(date: Date, wks: number) {
         return this.addDays(date, wks * 7);
     }
 
     /**
-      * Adds the specified amount of days to the given Gregorian date.
-      * @param date The date
-      * @param days The days to be added
-      */
+     * Adds the specified amount of days to the given Gregorian date.
+     * @param date The date
+     * @param days The days to be added
+     */
     public static addDays(date: Date, days: number) {
         const d = new Date(date.valueOf());
         d.setDate(d.getDate() + days);
@@ -169,33 +169,62 @@ class UmAlQuraStatic {
     }
 
     /**
-      * Returns the Hijri day of year for the specified Gregorian date.
-      * @param date The date
-      */
+     * Adds the specified amount of units to the given Gregorian date.
+     * @param date The date
+     * @param value The amount of `unit`s to add
+     * @param unit The unit of time
+     */
+    public static addTime(date: Date, value: number, unit: 'hour' | 'minute' | 'second' | 'millisecond') {
+        const d = new Date(date.valueOf());
+
+        switch (unit) {
+            case 'hour':
+                d.setHours(d.getHours() + value);
+                break;
+            case 'minute':
+                d.setMinutes(d.getMinutes() + value);
+                break;
+            case 'second':
+                d.setSeconds(d.getSeconds() + value);
+                break;
+            case 'millisecond':
+                d.setMilliseconds(d.getMilliseconds() + value);
+                break;
+            default:
+                throw new Error('Invalid value for `unit` param');
+        }
+
+        return d;
+    }
+
+    /**
+     * Returns the Hijri day of year for the specified Gregorian date.
+     * @param date The date
+     */
     public static getDayOfYear(date: Date) {
         return this._getDatePart(date, DatePart.DayOfYear);
     }
 
     /**
-      * Returns the Hijri day of month for the specified Gregorian date.
-      * @param date The date
-      */
+     * Returns the Hijri day of month for the specified Gregorian date.
+     * @param date The date
+     */
     public static getDayOfMonth(date: Date) {
         return this._getDatePart(date, DatePart.Day);
     }
 
     /**
-      * Returns the day of week for the specified Gregorian date.
-      * @param date The date
-      */
+     * Returns the day of week for the specified Gregorian date.
+     * @param date The date
+     */
     public static getDayOfWeek(date: Date) {
         return date.getDay();
     }
 
     /**
-      * Returns the Hijri week of year for the specified Gregorian date.
-      * @param date The date
-      */
+     * Returns the Hijri week of year for the specified Gregorian date.
+     * @param date The date
+     */
     public static getWeekOfYear(date: Date) {
         const firstDayOfYear = this.startOf(date, 'year').getDay();
         const daysToDayOfWeek = firstDayOfYear - date.getDay();
@@ -205,9 +234,9 @@ class UmAlQuraStatic {
     }
 
     /**
-      * Returns the number of days in the specified Hijri year.
-      * @param hy The Hijri year
-      */
+     * Returns the number of days in the specified Hijri year.
+     * @param hy The Hijri year
+     */
     public static getDaysInYear(hy: number) {
         this._checkYearRange(hy);
 
@@ -227,10 +256,10 @@ class UmAlQuraStatic {
     }
 
     /**
-      * Returns the number of days in the specified Hijri year and month.
-      * @param hy The Hijri year
-      * @param hm The Hijri month
-      */
+     * Returns the number of days in the specified Hijri year and month.
+     * @param hy The Hijri year
+     * @param hm The Hijri month
+     */
     public static getDaysInMonth(hy: number, hm: number) {
         this._checkYearRange(hy);
         this._checkMonthRange(hm);
@@ -243,25 +272,25 @@ class UmAlQuraStatic {
     }
 
     /**
-      * Returns the Hijri year corresponding to the given Gregorian date.
-      * @param date The date
-      */
+     * Returns the Hijri year corresponding to the given Gregorian date.
+     * @param date The date
+     */
     public static getYear(date: Date) {
         return this._getDatePart(date, DatePart.Year);
     }
 
     /**
-      * Returns the Hijri month corresponding to the given Gregorian date.
-      * @param date The date
-      */
+     * Returns the Hijri month corresponding to the given Gregorian date.
+     * @param date The date
+     */
     public static getMonth(date: Date) {
         return this._getDatePart(date, DatePart.Month);
     }
 
     /**
-      * Returns the Hijri month array for the given Gregorian date.
-      * @param date The date
-      */
+     * Returns the Hijri month array for the given Gregorian date.
+     * @param date The date
+     */
     public static getMonthArray(date: Date) {
         const weeks: Array<Array<Date | null>> = [];
         const month = this.getMonth(date);
@@ -287,7 +316,7 @@ class UmAlQuraStatic {
      * @param date: The date
      * @param unit: The unit of time
      */
-    public static startOf(date: Date, unit: UnitOfDateTime) {
+    public static startOf(date: Date, unit: UnitOfTime) {
         let d = new Date(date);
         const { hy, hm } = this.gregorianToHijri(d);
 
@@ -320,7 +349,7 @@ class UmAlQuraStatic {
      * @param date: The date
      * @param unit: The unit of time
      */
-    public static endOf(date: Date, unit: UnitOfDateTime) {
+    public static endOf(date: Date, unit: UnitOfTime) {
         let d = new Date(date);
         const { hy, hm } = this.gregorianToHijri(d);
         let daysInMonth;
@@ -352,24 +381,24 @@ class UmAlQuraStatic {
     }
 
     /**
-      * Returns whether or not the given Hijri year is a leap year.
-      * A Hijri leap year is where the number of days in that year is 355.
-      * @param hy The Hijri year
-      */
+     * Returns whether or not the given Hijri year is a leap year.
+     * A Hijri leap year is where the number of days in that year is 355.
+     * @param hy The Hijri year
+     */
     public static isLeapYear(hy: number) {
         return this.getDaysInYear(hy) === 355;
     }
 
     /**
-      * Converts the specified Hijri date time to a Gregorian Date instance.
-      * @param hy The Hijri year
-      * @param hm The Hijri month
-      * @param hd The Hijri day
-      * @param hour The Hour component
-      * @param minute The Minute component
-      * @param second The Second component
-      * @param millisecond The Millisecond component
-      */
+     * Converts the specified Hijri date time to a Gregorian Date instance.
+     * @param hy The Hijri year
+     * @param hm The Hijri month
+     * @param hd The Hijri day
+     * @param hour The Hour component
+     * @param minute The Minute component
+     * @param second The Second component
+     * @param millisecond The Millisecond component
+     */
     public static toDate(hy: number, hm: number, hd: number, hour: number = 0, minute: number = 0, second: number = 0, millisecond: number = 0) {
         const daysInMonth = this.getDaysInMonth(hy, hm);
 
@@ -383,11 +412,11 @@ class UmAlQuraStatic {
     }
 
     /**
-      * Formats the specified Gregorian Date instance in Hijri date.
-      * @param date The date
-      * @param mask The format mask
-      * @param locale The locale to use. If omitted, uses the globally set locale or the default locale.
-      */
+     * Formats the specified Gregorian Date instance in Hijri date.
+     * @param date The date
+     * @param mask The format mask
+     * @param locale The locale to use. If omitted, uses the globally set locale or the default locale.
+     */
     public static format(date: Date, mask: string, locale?: string) {
         const { hy, hm, hd } = this.gregorianToHijri(date);
         return format(date, mask,
@@ -398,17 +427,17 @@ class UmAlQuraStatic {
     }
 
     /**
-      * Sets global locale to be used for formatting.
-      * @param locale The locale
-      */
+     * Sets global locale to be used for formatting.
+     * @param locale The locale
+     */
     public static setLocale(locale: string) {
         this.locale = this._loadLocale(locale);
     }
 
     /**
-      * Registers the specified locale.
-      * @param locale The locale
-      */
+     * Registers the specified locale.
+     * @param locale The locale
+     */
     public static registerLocale(locale: Locale) {
         if (!locale.name) {
             throw new Error(`The locale's 'name' property must not be empty.`);

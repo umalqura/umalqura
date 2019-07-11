@@ -87,6 +87,15 @@ describe('Date manipulation', () => {
         expect(d.getMonth()).toBe(6);
         expect(d.getDate()).toBe(8);
     });
+
+    it('addTime()', () => {
+        const d = new Date(2019, 6, 3, 12, 30, 30, 500);
+
+        expect(UmAlQuraStatic.addTime(d, 13, 'hour')).toEqual(new Date(2019, 6, 4, 1, 30, 30, 500));
+        expect(UmAlQuraStatic.addTime(d, 35, 'minute')).toEqual(new Date(2019, 6, 3, 13, 5, 30, 500));
+        expect(UmAlQuraStatic.addTime(d, 35, 'second')).toEqual(new Date(2019, 6, 3, 12, 31, 5, 500));
+        expect(UmAlQuraStatic.addTime(d, 600, 'millisecond')).toEqual(new Date(2019, 6, 3, 12, 30, 31, 100));
+    });
 });
 
 describe('Date part retreival', () => {
@@ -253,6 +262,11 @@ describe('Input validation', () => {
 
     it('gregorianToHijri() throws for out of range date', () => {
         expect(() => UmAlQuraStatic.gregorianToHijri(new Date(100, 1, 1))).toThrow('Invalid value for epoch. Must be between -2198718412000 and 3404321999999.');
+    });
+
+    it('addTime() throws for invalid unit', () => {
+        // @ts-ignore
+        expect(() => UmAlQuraStatic.addTime(new Date(), 5, 'invalid')).toThrow('Invalid value for `unit` param');
     });
 
     it('startOf() throws for invalid unit', () => {

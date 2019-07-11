@@ -1,5 +1,4 @@
-type UnitOfDate = 'year' | 'month' | 'week' | 'day';
-type UnitOfDateTime = UnitOfDate | 'hour' | 'minute' | 'second';
-type UnitOfDateTimeMs = UnitOfDateTime | 'millisecond';
+type UnitOfTime = 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second';
+type UnitOfTimeMs = UnitOfTime | 'millisecond';
 
-export { UnitOfDate, UnitOfDateTime, UnitOfDateTimeMs };
+export { UnitOfTime, UnitOfTimeMs };
