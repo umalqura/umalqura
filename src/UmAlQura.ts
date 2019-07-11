@@ -78,12 +78,12 @@ class UmAlQura {
     constructor(hy: number, hm: number, hd: number, hour?: number, minute?: number, second?: number, millisecond?: number);
     constructor(dateOrHy?: Date | number, hm?: number, hd?: number, hour = 0, minute = 0, second = 0, millisecond = 0) {
         if (dateOrHy instanceof Date) {
-            this.setDate(dateOrHy);
+            this._setDate(dateOrHy);
         } else if (dateOrHy !== undefined && hm !== undefined && hd !== undefined) {
             const { gy, gm, gd } = UmAlQuraStatic.hijriToGregorian(dateOrHy, hm, hd);
-            this.setDate(new Date(gy, gm, gd, hour, minute, second, millisecond));
+            this._setDate(new Date(gy, gm, gd, hour, minute, second, millisecond));
         } else {
-            this.setDate(new Date());
+            this._setDate(new Date());
         }
     }
 
@@ -151,7 +151,7 @@ class UmAlQura {
         return new UmAlQura(this.date);
     }
 
-    private setDate(date: Date) {
+    private _setDate(date: Date) {
         const { hy, hm, hd } = UmAlQuraStatic.gregorianToHijri(date);
         this._date = new Date(date.valueOf());
         this._hy = hy;
