@@ -256,15 +256,15 @@ declare namespace umalqura {
          */
         subtract(value: number, unit: 'year' | 'month' | 'week' | 'day'): UmAlQura;
         /**
-         * Returns the Gregorian date corresponding to the Hijri date of this instance starting at the specified unit of time.
+         * Returns a new instance having the Hijri date of this instance starting at the specified unit of time.
          * @param {('year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second')} unit The unit of time
          */
-        startOf(unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second'): Date;
+        startOf(unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second'): UmAlQura;
         /**
-         * Returns the Gregorian date corresponding to the Hijri date of this instance ending at the specified unit of time.
+         * Returns a new instance having the Hijri date of this instance ending at the specified unit of time.
          * @param {('year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second')} unit The unit of time
          */
-        endOf(unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second'): Date;
+        endOf(unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second'): UmAlQura;
         /**
          * Formats this instance in Hijri date.
          * @param {string} mask The mask
