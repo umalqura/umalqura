@@ -158,13 +158,13 @@ declare namespace umalqura {
          * @param date: The date
          * @param unit: The unit of time
          */
-        static startOf(date: Date, unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second'): Date;
+        static startOf(date: Date, unit: UnitOfDateTime): Date;
         /**
          * Returns the Gregorian date corresponding to the Hijri date ending at the specified unit of time.
          * @param date: The date
          * @param unit: The unit of time
          */
-        static endOf(date: Date, unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second'): Date;
+        static endOf(date: Date, unit: UnitOfDateTime): Date;
         /**
           * Returns whether or not the given Hijri year is a leap year.
           * A Hijri leap year is where the number of days in that year is 355.
@@ -273,27 +273,27 @@ declare namespace umalqura {
         /**
          * Adds the specified amount of `unit` to the current date and returns a new instance.
          * @param {number} value The amount of units to be added
-         * @param {('year' | 'month' | 'week' | 'day')} unit The unit of time
+         * @param {UnitOfDate} unit The unit of time
          * @returns Reference to this instance.
          */
-        add(value: number, unit: 'year' | 'month' | 'week' | 'day'): UmAlQura;
+        add(value: number, unit: UnitOfDate): UmAlQura;
         /**
          * Subtracts the specified amount of `unit` from the current date and returns a new instance.
          * @param {number} value The amount of units to be subtracted
-         * @param {('year' | 'month' | 'week' | 'day')} unit The unit of time
+         * @param {UnitOfDate} unit The unit of time
          * @returns Reference to this instance.
          */
-        subtract(value: number, unit: 'year' | 'month' | 'week' | 'day'): UmAlQura;
+        subtract(value: number, unit: UnitOfDate): UmAlQura;
         /**
          * Returns a new instance having the Hijri date of this instance starting at the specified unit of time.
-         * @param {('year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second')} unit The unit of time
+         * @param {UnitOfDateTime} unit The unit of time
          */
-        startOf(unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second'): UmAlQura;
+        startOf(unit: UnitOfDateTime): UmAlQura;
         /**
          * Returns a new instance having the Hijri date of this instance ending at the specified unit of time.
-         * @param {('year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second')} unit The unit of time
+         * @param {UnitOfDateTime} unit The unit of time
          */
-        endOf(unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second'): UmAlQura;
+        endOf(unit: UnitOfDateTime): UmAlQura;
         /**
          * Formats this instance in Hijri date.
          * @param {string} mask The mask
@@ -305,6 +305,10 @@ declare namespace umalqura {
          */
         clone(): UmAlQura;
     }
+
+    type UnitOfDate = 'year' | 'month' | 'week' | 'day';
+    type UnitOfDateTime = UnitOfDate | 'hour' | 'minute' | 'second';
+    type UnitOfDateTimeMs = UnitOfDateTime | 'millisecond';
 
     interface Mask {
         default: string;

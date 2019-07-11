@@ -2,6 +2,7 @@ import DateMapping from './DateMapping';
 import DatePart from './DatePart';
 import { format } from './format';
 import { ar, en, Locale } from './locale';
+import { UnitOfDateTime } from './units';
 
 /// Calendar support range:
 ///     Calendar    Minimum     Maximum
@@ -286,7 +287,7 @@ class UmAlQuraStatic {
      * @param date: The date
      * @param unit: The unit of time
      */
-    public static startOf(date: Date, unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second') {
+    public static startOf(date: Date, unit: UnitOfDateTime) {
         let d = new Date(date);
         const { hy, hm } = this.gregorianToHijri(d);
 
@@ -319,7 +320,7 @@ class UmAlQuraStatic {
      * @param date: The date
      * @param unit: The unit of time
      */
-    public static endOf(date: Date, unit: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second') {
+    public static endOf(date: Date, unit: UnitOfDateTime) {
         let d = new Date(date);
         const { hy, hm } = this.gregorianToHijri(d);
         let daysInMonth;
