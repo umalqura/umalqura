@@ -1,12 +1,21 @@
+import { en } from '../src/locale';
 import umalqura from '../src/umalqura.fn';
 import UmAlQuraStatic from '../src/UmAlQuraStatic';
 
+beforeEach(() => umalqura.locale('en'));
+
 describe('Locales', () => {
-    it('locale() returns the globally set locale', () => {
-        expect(umalqura.locale().name).toBe('en');
-        umalqura.setLocale('ar');
-        expect(umalqura.locale().name).toBe('ar');
+    it('locale() gets or sets the global locale', () => {
+        expect(umalqura.locale()).toBe('en');
+        umalqura.locale('ar');
+        expect(umalqura.locale()).toBe('ar');
     });
+
+    it('times() returns same using the currently set locale', () => expect(umalqura.times()).toEqual(en.timeNames));
+    it('days() returns same using the currently set locale', () => expect(umalqura.days()).toEqual(en.dayNames));
+    it('daysShort() returns same using the currently set locale', () => expect(umalqura.daysShort()).toEqual(en.dayNamesShort));
+    it('months() returns same using the currently set locale', () => expect(umalqura.months()).toEqual(en.monthNames));
+    it('monthsShort() returns same using the currently set locale', () => expect(umalqura.monthsShort()).toEqual(en.monthNamesShort));
 });
 
 describe('Initializer', () => {

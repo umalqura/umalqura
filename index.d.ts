@@ -21,7 +21,7 @@ declare function umalqura(hy: number, hm: number, hd: number, hour?: number, min
 
 declare namespace umalqura {
     /**
-     * Returns library version.
+     * Returns the library version.
      */
     const VERSION: string;
     /**
@@ -29,14 +29,30 @@ declare namespace umalqura {
      */
     const $: typeof UmAlQuraStatic;
     /**
-     * Returns the globally set locale.
+     * Gets or sets the global locale.
+     * @param locale The locale to set. If omitted, returns the current locale
      */
-    const locale: () => Locale;
+    const locale: (locale?: string) => string | void;
     /**
-      * Sets global locale to be used for formatting.
-      * @param locale The locale
-      */
-    const setLocale: typeof UmAlQuraStatic.setLocale;
+     * Returns the times names using the currently set locale.
+     */
+    const times: () => string[];
+    /**
+     * Returns the days names using the currently set locale.
+     */
+    const days: () => string[];
+    /**
+     * Returns the days short names using the currently set locale.
+     */
+    const daysShort: () => string[];
+    /**
+     * Returns the months names using the currently set locale.
+     */
+    const months: () => string[];
+    /**
+     * Returns the months short names using the currently set locale.
+     */
+    const monthsShort: () => string[];
 
     class UmAlQuraStatic {
         /**

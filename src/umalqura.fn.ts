@@ -32,7 +32,7 @@ function umalqura(dateOrHy?: Date | number, hm?: number, hd?: number, hour = 0, 
 }
 
 /**
- * Returns library version.
+ * Returns the library version.
  */
 umalqura.VERSION = "0.0.0-DEV_BUILD";
 /**
@@ -40,13 +40,29 @@ umalqura.VERSION = "0.0.0-DEV_BUILD";
  */
 umalqura.$ = UmAlQuraStatic;
 /**
- * Returns the globally set locale.
+ * Gets or sets the global locale
+  * @param locale The locale to set. If omitted, returns the current locale
  */
-umalqura.locale = () => UmAlQuraStatic['locale'];
+umalqura.locale = (locale?: string) => locale ? UmAlQuraStatic.setLocale(locale) : UmAlQuraStatic['locale'].name;
 /**
-  * Sets global locale to be used for formatting.
-  * @param locale The locale
-  */
-umalqura.setLocale = UmAlQuraStatic.setLocale;
+ * Returns the times names using the currently set locale.
+ */
+umalqura.times = () => [...UmAlQuraStatic['locale'].timeNames];
+/**
+ * Returns the days names using the currently set locale.
+ */
+umalqura.days = () => [...UmAlQuraStatic['locale'].dayNames];
+/**
+ * Returns the days short names using the currently set locale.
+ */
+umalqura.daysShort = () => [...UmAlQuraStatic['locale'].dayNamesShort];
+/**
+ * Returns the months names using the currently set locale.
+ */
+umalqura.months = () => [...UmAlQuraStatic['locale'].monthNames];
+/**
+ * Returns the months short names using the currently set locale.
+ */
+umalqura.monthsShort = () => [...UmAlQuraStatic['locale'].monthNamesShort];
 
 export default umalqura;
