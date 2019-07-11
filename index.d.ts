@@ -300,6 +300,10 @@ declare namespace umalqura {
          * @param {string} locale The locale to use. If omitted, uses  the locale set via `locale` or the default locale.
          */
         format(mask: string, locale?: string): string;
+        /**
+         * Clones this instance and returns a new instance with the same values.
+         */
+        clone(): UmAlQura;
     }
 
     interface Mask {

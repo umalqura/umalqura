@@ -119,3 +119,15 @@ describe('Input validation', () => {
     // @ts-ignore
     it('subtract() throws for invalid unit', () => expect(() => new UmAlQura().subtract(1, 'invalid')).toThrow('Invalid value for `unit`'));
 });
+
+
+describe('Cloning', () => {
+    it('Can clone itself', () => {
+        const uq = new UmAlQura(new Date(2019, 6, 3));
+        const clone = uq.clone();
+
+        expect(uq).toEqual(clone);
+        expect(uq === clone).toBeFalsy();
+        expect(uq.date === clone.date).toBeFalsy(); // Reference check
+    });
+});

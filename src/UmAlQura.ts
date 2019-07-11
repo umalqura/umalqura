@@ -144,6 +144,13 @@ class UmAlQura {
         return UmAlQuraStatic.format(this.date, mask, locale || UmAlQuraStatic['locale'].name);
     }
 
+    /**
+     * Clones this instance and returns a new instance with the same values.
+     */
+    public clone() {
+        return new UmAlQura(this.date);
+    }
+
     private setDate(date: Date) {
         const { hy, hm, hd } = UmAlQuraStatic.gregorianToHijri(date);
         this._date = new Date(date.valueOf());
