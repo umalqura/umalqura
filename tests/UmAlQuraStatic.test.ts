@@ -1,3 +1,4 @@
+import { en } from '../src/locale';
 import UmAlQuraStatic from '../src/UmAlQuraStatic';
 
 describe('Supported calendar range', () => {
@@ -219,6 +220,22 @@ describe('Locales', () => {
         const f = UmAlQuraStatic.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy');
         expect(f).toBe('٣٠/١٠/١٤٤٠');
     });
+
+    it('Throws when registering a locale with empty name', () => {
+        // @ts-ignore
+        expect(() => UmAlQuraStatic.registerLocale({ name: '' })).toThrow(`The locale's 'name' property must not be empty.`);
+    });
+
+    it('Throws when registering a locale that already exists', () => {
+        // @ts-ignore
+        expect(() => UmAlQuraStatic.registerLocale({ name: 'en' })).toThrow(`A locale with the same name 'en' is already registered.`);
+    });
+
+    it('Can register new locale', () => {
+        UmAlQuraStatic.registerLocale(testLocale);
+        const f = UmAlQuraStatic.format(new Date(2019, 6, 3), 'default', testLocale.name);
+        expect(f).toBe('Wednesday');
+    });
 });
 
 describe('Input validation', () => {
@@ -261,3 +278,8 @@ describe('Input validation', () => {
         expect(() => UmAlQuraStatic.toDate(1440, 1, 1, 0, 0, 0, -1)).toThrow('Invalid value for hour, minute, second or millisecond.');
     });
 });
+
+// Change the default mask so we can test locale registration
+const testLocale = en;
+testLocale.name = 'test-locale';
+testLocale.masks.default = 'dddd';

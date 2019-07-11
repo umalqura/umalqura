@@ -1,7 +1,7 @@
 import DateMapping from './DateMapping';
 import DatePart from './DatePart';
 import { format } from './format';
-import { en, Locale } from './locale';
+import { ar, en, Locale } from './locale';
 
 /// Calendar support range:
 ///     Calendar    Minimum     Maximum
@@ -22,7 +22,10 @@ class UmAlQuraStatic {
 
     private static readonly hijriYearData = UmAlQuraStatic._initDateMapping();
 
-    private static locale: Locale = en;
+    // Holds globally set locale
+    private static locale = en;
+    // Holds registered locales
+    private static locales: { [name: string]: Locale } = {};
 
     /**
      * The minimum supported Hijri calendar year.
@@ -401,13 +404,29 @@ class UmAlQuraStatic {
         UmAlQuraStatic.locale = UmAlQuraStatic._loadLocale(locale);
     }
 
-    private static _loadLocale(locale: string): Locale {
-        try {
-            return require(`./locale/${locale}`).default;
-        } catch {
-            console.warn(`Requested locale '${locale}' could not be found, using default locale instead.`);
-            return en;
+    /**
+      * Registers the specified locale.
+      * @param locale The locale
+      */
+    public static registerLocale(locale: Locale) {
+        if (!locale.name) {
+            throw new Error(`The locale's 'name' property must not be empty.`);
         }
+
+        if (this.locales[locale.name]) {
+            throw new Error(`A locale with the same name '${locale.name}' is already registered.`);
+        }
+
+        this.locales[locale.name] = locale;
+    }
+
+    private static _loadLocale(locale: string) {
+        if (this.locales[locale]) {
+            return this.locales[locale];
+        }
+
+        console.warn(`The requested locale '${locale}' could not be found. Using the default locale instead.`);
+        return en;
     }
 
     private static _getDatePart(date: Date, part: DatePart) {
@@ -672,5 +691,11 @@ class UmAlQuraStatic {
         return mapping;
     }
 }
+
+// Register both locales so they'll be bundled in the package.
+// This is fine since for this library, there will probably be
+// only be these two locales.
+UmAlQuraStatic.registerLocale(ar);
+UmAlQuraStatic.registerLocale(en);
 
 export default UmAlQuraStatic;

@@ -174,6 +174,11 @@ declare namespace umalqura {
           * @param locale The locale
           */
         static setLocale(locale: string): void;
+        /**
+          * Registers the specified locale.
+          * @param locale The locale
+          */
+        static registerLocale(locale: Locale): void;
     }
 
     class UmAlQura {

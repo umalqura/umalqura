@@ -4,7 +4,7 @@
     "description": "Zero dependency Hijri calendar based on Um AlQura",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
-    "typings": "index.d.ts",
+    "types": "index.d.ts",
     "umd": "./dist/browser/umalqura.js",
     "umd_name": "umalqura",
     "scripts": {
