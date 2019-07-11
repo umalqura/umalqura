@@ -1,7 +1,7 @@
 {
     "name": "@amef/umalqura",
     "version": "0.0.1",
-    "description": "Zero dependancy library to easily work with Hijri dates based on Um AlQura Calendar",
+    "description": "Zero dependency Hijri calendar based on Um AlQura",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
     "typings": "index.d.ts",
@@ -35,14 +35,24 @@
         "webpack-cli": "^3.3.5"
     },
     "files": [
+        "LICENSE",
+        "README.md",
         "dist/**/*",
         "src/**/*",
         "index.d.ts"
     ],
     "keywords": [
         "hijri",
-        "umalqura"
+        "umalqura",
+        "calendar",
+        "islamic-calendar",
+        "islam"
     ],
     "author": "Alaa Masoud",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/umalqura/umalqura.git"
+    },
+    "bugs": "https://github.com/umalqura/umalqura/issues",
     "license": "MIT"
 }
