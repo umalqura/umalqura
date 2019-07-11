@@ -70,14 +70,18 @@ class UmAlQura {
      * @param {number} hy The Hijri year
      * @param {number} hm The Hijri month
      * @param {number} hd The Hijri day
+     * @param {number} hour The Hour component, defaults to zero
+     * @param {number} minute The Minute component, defaults to zero
+     * @param {number} second The Second component, defaults to zero
+     * @param {number} millisecond The Millisecond component, defaults to zero
      */
-    constructor(hy: number, hm: number, hd: number);
-    constructor(dateOrHy?: Date | number, hm?: number, hd?: number) {
+    constructor(hy: number, hm: number, hd: number, hour?: number, minute?: number, second?: number, millisecond?: number);
+    constructor(dateOrHy?: Date | number, hm?: number, hd?: number, hour = 0, minute = 0, second = 0, millisecond = 0) {
         if (dateOrHy instanceof Date) {
             this.setDate(dateOrHy);
         } else if (dateOrHy !== undefined && hm !== undefined && hd !== undefined) {
             const { gy, gm, gd } = UmAlQuraStatic.hijriToGregorian(dateOrHy, hm, hd);
-            this.setDate(new Date(gy, gm, gd));
+            this.setDate(new Date(gy, gm, gd, hour, minute, second, millisecond));
         } else {
             this.setDate(new Date());
         }

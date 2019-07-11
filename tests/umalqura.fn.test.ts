@@ -40,4 +40,13 @@ describe('Initializer', () => {
         expect(uq.hm).toBe(10);
         expect(uq.hd).toBe(30);
     });
+
+    it('hy, hm, hd params - Initializes using given Hijri date and time', () => {
+        const uq = umalqura(1440, 10, 30, 19, 1, 15, 200);
+
+        expect(uq.date).toEqual(new Date(2019, 6, 3, 19, 1, 15, 200));
+        expect(uq.hy).toBe(1440);
+        expect(uq.hm).toBe(10);
+        expect(uq.hd).toBe(30);
+    });
 });

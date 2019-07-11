@@ -12,8 +12,12 @@ declare function umalqura(date: Date): umalqura.UmAlQura;
  * @param {number} hy The Hijri year
  * @param {number} hm The Hijri month
  * @param {number} hd The Hijri day
+ * @param {number} hour The Hour component, defaults to zero
+ * @param {number} minute The Minute component, defaults to zero
+ * @param {number} second The Second component, defaults to zero
+ * @param {number} millisecond The Millisecond component, defaults to zero
  */
-declare function umalqura(hy: number, hm: number, hd: number): umalqura.UmAlQura;
+declare function umalqura(hy: number, hm: number, hd: number, hour?: number, minute?: number, second?: number, millisecond?: number): umalqura.UmAlQura;
 
 declare namespace umalqura {
     /**
@@ -244,8 +248,12 @@ declare namespace umalqura {
          * @param {number} hy The Hijri year
          * @param {number} hm The Hijri month
          * @param {number} hd The Hijri day
+         * @param {number} hour The Hour component, defaults to zero
+         * @param {number} minute The Minute component, defaults to zero
+         * @param {number} second The Second component, defaults to zero
+         * @param {number} millisecond The Millisecond component, defaults to zero
          */
-        constructor(hy: number, hm: number, hd: number);
+        constructor(hy: number, hm: number, hd: number, hour?: number, minute?: number, second?: number, millisecond?: number);
         /**
          * Adds the specified amount of `unit` to the current date and returns a new instance.
          * @param {number} value The amount of units to be added

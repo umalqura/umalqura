@@ -15,13 +15,17 @@ function umalqura(date: Date): UmAlQura;
  * @param {number} hy The Hijri year
  * @param {number} hm The Hijri month
  * @param {number} hd The Hijri day
+ * @param {number} hour The Hour component, defaults to zero
+ * @param {number} minute The Minute component, defaults to zero
+ * @param {number} second The Second component, defaults to zero
+ * @param {number} millisecond The Millisecond component, defaults to zero
  */
-function umalqura(hy: number, hm: number, hd: number): UmAlQura;
-function umalqura(dateOrHy?: Date | number, hm?: number, hd?: number): UmAlQura {
+function umalqura(hy: number, hm: number, hd: number, hour?: number, minute?: number, second?: number, millisecond?: number): UmAlQura;
+function umalqura(dateOrHy?: Date | number, hm?: number, hd?: number, hour = 0, minute = 0, second = 0, millisecond = 0): UmAlQura {
     if (dateOrHy instanceof Date) {
         return new UmAlQura(dateOrHy);
     } else if (dateOrHy !== undefined && hm !== undefined && hd !== undefined) {
-        return new UmAlQura(dateOrHy, hm, hd);
+        return new UmAlQura(dateOrHy, hm, hd, hour, minute, second, millisecond);
     } else {
         return new UmAlQura();
     }
