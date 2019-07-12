@@ -261,7 +261,7 @@ describe('Input validation', () => {
     });
 
     it('gregorianToHijri() throws for out of range date', () => {
-        expect(() => UmAlQuraStatic.gregorianToHijri(new Date(100, 1, 1))).toThrow('Invalid value for epoch. Must be between -2198718412000 and 3404321999999.');
+        expect(() => UmAlQuraStatic.gregorianToHijri(new Date(100, 1, 1))).toThrow(`Invalid value for epoch. Must be between ${UmAlQuraStatic['minDate'].getTime()} and ${UmAlQuraStatic['maxDate'].getTime()}.`);
     });
 
     it('addTime() throws for invalid unit', () => {
