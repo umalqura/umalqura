@@ -11,11 +11,14 @@ describe('Locales', () => {
         expect(umalqura.locale()).toBe('ar');
     });
 
+    it('rtl() returns same using the currently set locale', () => expect(umalqura.rtl()).toBeFalsy());
     it('times() returns same using the currently set locale', () => expect(umalqura.times()).toEqual(en.timeNames));
     it('days() returns same using the currently set locale', () => expect(umalqura.days()).toEqual(en.dayNames));
     it('daysShort() returns same using the currently set locale', () => expect(umalqura.daysShort()).toEqual(en.dayNamesShort));
     it('months() returns same using the currently set locale', () => expect(umalqura.months()).toEqual(en.monthNames));
     it('monthsShort() returns same using the currently set locale', () => expect(umalqura.monthsShort()).toEqual(en.monthNamesShort));
+    it('localizeNum() forwards call to the currently set locale', () => expect(umalqura.localizeNum(5)).toEqual(en.localizeNum(5)));
+    it('localizeDayNum() forwards call to the currently set locale', () => expect(umalqura.localizeDayNum(5)).toEqual(en.localizeDayNum(5)));
 });
 
 describe('Initializer', () => {

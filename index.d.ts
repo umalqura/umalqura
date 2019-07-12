@@ -34,6 +34,10 @@ declare namespace umalqura {
      */
     const locale: (locale?: string) => string | void;
     /**
+     * Returns whether the currently set locale is RTL or not.
+     */
+    const rtl: () => boolean;
+    /**
      * Returns the times names using the currently set locale.
      */
     const times: () => string[];
@@ -53,6 +57,14 @@ declare namespace umalqura {
      * Returns the months short names using the currently set locale.
      */
     const monthsShort: () => string[];
+    /**
+     * Returns the localized number for the given number using the currently set locale.
+     */
+    const localizeNum: (num: number | string) => string;
+    /**
+     * Returns the localized day number for the given day number using the currently set locale.
+     */
+    const localizeDayNum: (d: number) => string;
 
     class UmAlQuraStatic {
         /**

@@ -45,6 +45,10 @@ umalqura.$ = UmAlQuraStatic;
  */
 umalqura.locale = (locale?: string) => locale ? UmAlQuraStatic.setLocale(locale) : UmAlQuraStatic['locale'].name;
 /**
+ * Returns whether the currently set locale is RTL or not.
+ */
+umalqura.rtl = () => !!UmAlQuraStatic['locale'].rtl;
+/**
  * Returns the times names using the currently set locale.
  */
 umalqura.times = () => [...UmAlQuraStatic['locale'].timeNames];
@@ -64,5 +68,13 @@ umalqura.months = () => [...UmAlQuraStatic['locale'].monthNames];
  * Returns the months short names using the currently set locale.
  */
 umalqura.monthsShort = () => [...UmAlQuraStatic['locale'].monthNamesShort];
+/**
+ * Returns the localized number for the given number using the currently set locale.
+ */
+umalqura.localizeNum = (num: number | string) => UmAlQuraStatic['locale'].localizeNum(num);
+/**
+ * Returns the localized day number for the given day number using the currently set locale.
+ */
+umalqura.localizeDayNum = (d: number) => UmAlQuraStatic['locale'].localizeDayNum(d);
 
 export default umalqura;
