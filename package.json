@@ -15,11 +15,12 @@
         "build:uglify:umd": "node ./node_modules/uglify-js/bin/uglifyjs --comments -o ./dist/umalqura.min.js ./dist/umalqura.js",
         "prepack": "node ./build/embed-version.js",
         "test": "node ./node_modules/jest/bin/jest.js",
-        "test:coverage": "node ./node_modules/jest/bin/jest.js --coverage"
+        "test:coverage": "node ./node_modules/jest/bin/jest.js --coverage --coverageReporters=text-lcov | coveralls"
     },
     "dependencies": {},
     "devDependencies": {
         "@types/jest": "^24.0.15",
+        "coveralls": "^3.0.5",
         "jest": "^24.8.0",
         "rimraf": "^2.6.3",
         "rollup": "^1.16.7",
