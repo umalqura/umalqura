@@ -295,6 +295,52 @@ declare namespace umalqura {
          */
         endOf(unit: UnitOfTime): UmAlQura;
         /**
+         * Checks if current date is before the specified date. The comparison is made based on milliseconds of both
+         * times. This can be changed by specifying a value for the `unit` parameter.
+         * @param {(UmAlQura | Date)} other The date to compare against
+         * @param {UnitOfTimeMs} [unit='millisecond'] The unit of time
+         */
+        isBefore(other: UmAlQura | Date, unit?: UnitOfTimeMs): boolean;
+        /**
+         * Checks if current date is after the specified date. The comparison is made based on milliseconds,
+         * this can be changed by specifying a value for the `unit` parameter.
+         * @param {(UmAlQura | Date)} other The date to compare against
+         * @param {UnitOfTimeMs} [unit='millisecond'] The unit of time
+         */
+        isAfter(other: UmAlQura | Date, unit?: UnitOfTimeMs): boolean;
+        /**
+         * Checks if current date is same as the specified date. The comparison is made based on milliseconds,
+         * this can be changed by specifying a value for the `unit` parameter.
+         * @param {(UmAlQura | Date)} other The date to compare against
+         * @param {UnitOfTimeMs} [unit='millisecond'] The unit of time
+         */
+        isSame(other: UmAlQura | Date, unit?: UnitOfTimeMs): boolean;
+        /**
+         * Checks if current date is same as or before the specified date. The comparison is made based on milliseconds,
+         * this can be changed by specifying a value for the `unit` parameter.
+         * @param {(UmAlQura | Date)} other The date to compare against
+         * @param {UnitOfTimeMs} [unit='millisecond'] The unit of time
+         */
+        isSameOrBefore(other: UmAlQura | Date, unit?: UnitOfTimeMs): boolean;
+        /**
+         * Checks if current date is same as or after the specified date. The comparison is made based on milliseconds,
+         * this can be changed by specifying a value for the `unit` parameter.
+         * @param {(UmAlQura | Date)} other The date to compare against
+         * @param {UnitOfTimeMs} [unit='millisecond'] The unit of time
+         */
+        isSameOrAfter(other: UmAlQura | Date, unit?: UnitOfTimeMs): boolean;
+        /**
+         * Checks if current date is between the specified `from`/`to` dates. The comparison is made based on milliseconds,
+         * this can be changed by specifying a value for the `unit` parameter. The comparison is exclusive of both ends by default,
+         * this can be controller by `fromInclusive`/`toInclusive` parameters.
+         * @param {(UmAlQura | Date)} from The lower bound date
+         * @param {(UmAlQura | Date)} to The higher bound date
+         * @param {boolean} [fromInclusive=false] Whether lower bound is inclusive, defaults to false.
+         * @param {boolean} [toInclusive=false] Whether upper bound is inclusive, defaults to false.
+         * @param {UnitOfTimeMs} [unit='millisecond'] The unit of time
+         */
+        isBetween(from: UmAlQura | Date, to: UmAlQura | Date, fromInclusive?: boolean, toInclusive?: boolean, unit?: UnitOfTimeMs): boolean;
+        /**
          * Formats this instance in Hijri date.
          * @param {string} mask The mask
          * @param {string} locale The locale to use. If omitted, uses  the locale set via `locale` or the default locale.
