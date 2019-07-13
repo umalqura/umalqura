@@ -6,3 +6,12 @@ install:
   - yarn
 script:
   - npm run build && npm run test:coverage
+
+deploy:
+  provider: npm
+  email: EMAIL
+  api_key: NPM_TOKEN
+  skip_cleanup: true
+  on:
+    branch: master
+    tags: true
