@@ -1,5 +1,5 @@
 {
-    "name": "@amef/umalqura",
+    "name": "@umalqura/core",
     "version": "0.0.1",
     "description": "Zero dependency Hijri calendar based on Um AlQura",
     "main": "./dist/index.js",
