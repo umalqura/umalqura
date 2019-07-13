@@ -47,8 +47,6 @@ var now = umalqura();
 
 ### API
 
-#### Initialization
-
 ##### Construction
 
 ```ts
@@ -56,8 +54,8 @@ var now = umalqura();
 umalqura();
 // Initializes using provided date and time.
 umalqura(date: Date);
-// Initializes using provided Hijri year, month, day and the optionally the provided time.
-umalqura(hy: number, hm: number, hd: number, hour?: number, minute?: number, second?: number, millisecond?: number)
+// Initializes using provided Hijri year, month, day and the optionally provided time.
+umalqura(hy: number, hm: number, hd: number, hour?: number, minute?: number, second?: number, millisecond?: number);
 ```
 
 The `umalqura(...)` function returns an initialized `umalqura.UmAlQura` object which exposes the following properties and methods:
@@ -121,8 +119,25 @@ Examples:
 import uq from '@umalqura/core';
 
 const d = uq(new Date(2019, 6, 3));
-console.log(d.format('dd/mm/yyyy', 'ar'));  // Outputs ٣٠/١٠/١٤٤٠
+// Add 5 Hijri months
+const after5HijriMonths = d.add(5, 'month');
+
+// ٣٠/١٠/١٤٤٠
+d.format('dd/mm/yyyy', 'ar');
+// 30/03/1441
+after5HijriMonths.format('dd/mm/yyyy');
+// True
+after5HijriMonths.isAfter(d);
+// Shawwāl 1, 1440
+d.startOf('month').format('longDate');
+
+const endOf1440H = d.endOf('year');
+// الجمعة، ٢٩ ذو الحجة، ١٤٤٠
+endOf1440H.format('fullDate', 'ar');
+// Fri Aug 30 2019 23:59:59 TZ...
+endOf1440H.date;
 ```
+
 The following properties and functions exist directly on the export `umalqura` object:
 
 | Name                        | Description
@@ -143,7 +158,28 @@ Examples:
 ```js
 import uq from '@umalqura/core';
 
-uq.locale('ar');        // Set global locale to Arabic so that we no longer need to specify a locale when calling format() function.
-uq.rtl();               // Returns true
-uq.months();            // Returns ['محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة']
+// Set global locale to Arabic so that we no longer need to specify a locale when calling format() function.
+uq.locale('ar');
+// Returns true
+uq.rtl();
+// Returns ['محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة']
+uq.months();
 ```
+
+##### Pre-defined Formatting Masks
+
+| Name         | Format                                                                      |
+|--------------|-----------------------------------------------------------------------------|
+| `default`    | `ddd dd mmm yyyy HH:MM:ss` for `ar`<br/>`ddd mmm dd yyyy HH:MM:ss` for `en` |
+| `shortDate`  | `yy/m/d` for `ar`<br/>`m/d/yy` for `en`                                     |
+| `mediumDate` | `d mmm, yyyy` for `ar`<br/>`mmm d, yyyy` for `en`                           |
+| `longDate`   | `d mmmm, yyyy` for `ar`<br/>`mmmm d, yyyy` for `en`                         |
+| `fullDate`   | `dddd, d mmmm, yyyy` for `ar`<br/>`dddd, mmmm d, yyyy` for `en`             |
+| `shortTime`  | `h:MM TT`                                                                   |
+| `mediumTime` | `h:MM:ss TT`                                                                |
+| `longTime`   | `h:MM:ss.l TT`                                                              |
+
+
+### Sample
+
+An HTML-based sample is available in `./sample/browser.html` locally or online @ https://umalqura.github.io/.
