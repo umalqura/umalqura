@@ -97,19 +97,19 @@ console.log(d.date);                 // Outputs Wed Jul 03 2019 00:00:00 TZ...
 
 Note that all methods are immutably.
 
-| Name                                                     | Description
-|----------------------------------------------------------|----------------------------------------------------------------------------------------------
-| `add(v: number, u: unitMs)`                              | Returns a new `UmAlQura` object adding the specified number of Hijri units to the current instance.
-| `subtract(v: number, u: unitMs)`                         | Returns a new `UmAlQura` object subtracting the specified number of Hijri units to the current instance.
-| `startOf(u: unit)`                                       | Returns a new `UmAlQura` object starting at the specified Hijri unit of time.
-| `endOf(u: unit)`                                         | Returns a new `UmAlQura` object ending at the specified Hijri unit of time.
-| `isBefore(cmp: UmAlQura|Date, unit?: unitMs)`            | Returns whether current instance is before `cmp`. Check can be pinned down to `unitMs` which defaults to milliseconds.
-| `isAfter(cmp: UmAlQura|Date, unit?: unitMs)`             | Returns whether current instance is after `cmp`. Check can be pinned down to `unitMs` which defaults to milliseconds.
-| `isSame(cmp: UmAlQura|Date, unit?: unitMs)`              | Returns whether current instance is same as `cmp`. Check can be pinned down to `unitMs` which defaults to milliseconds.
-| `isSameOrBefore(cmp: UmAlQura|Date, unit?: unitMs)`      | Returns whether current instance is same as or before `cmp`. Check can be pinned down to `unitMs` which defaults to milliseconds.
-| `isSameOrAfter(cmp: UmAlQura|Date, unit?: unitMs)`       | Returns whether current instance is same as or after `cmp`. Check can be pinned down to `unitMs` which defaults to milliseconds.
-| `isBetween(from: UmAlQura|Date, to: UmAlQura|Date, fromIncl?: boo, toIncl?: boo unit?: unitMs)` | Returns whether current instance is between `from` and `to`. Check can be pinned down to `unitMs` which defaults to milliseconds. By, default the match is exclusive of both ends. This can be controlled via `fromIncl` and `toIncl`.
-| `format(mask: string, locale?: string)`                  | Returns a formatted string of the Hijri date and time using the specified `mask` and optionally a `locale`.
+| Name             | Arguments                              | Description
+|------------------|----------------------------------------|-----------------------------------------------------------------------------------------------------|
+| `add`            | `v:number`<br/>`u:unitMs`              | Returns a new `UmAlQura` object adding the specified number of Hijri units to the current instance. |
+| `subtract`       | `v:number`<br/>`u:unitMs`              | Returns a new `UmAlQura` object subtracting the specified number of Hijri units to the current instance. |
+| `startOf`        | `u:unit`                               | Returns a new `UmAlQura` object starting at the specified Hijri unit of time. |
+| `endOf`          | `u:unit`                               | Returns a new `UmAlQura` object ending at the specified Hijri unit of time. |
+| `isBefore`       | `cmp:UmAlQura\|Date`<br/>`unit?:unitMs` | Returns whether current instance is before `cmp`. Check can be pinned down to `unitMs` which defaults to milliseconds. |
+| `isAfter`        | `cmp:UmAlQura\|Date`<br/>`unit?:unitMs` | Returns whether current instance is after `cmp`. Check can be pinned down to `unitMs` which defaults to milliseconds. |
+| `isSame`         | `cmp:UmAlQura\|Date`<br/>`unit?:unitMs` | Returns whether current instance is same as `cmp`. Check can be pinned down to `unitMs` which defaults to milliseconds. |
+| `isSameOrBefore` | `cmp:UmAlQura\|Date`<br/>`unit?:unitMs` | Returns whether current instance is same as or before `cmp`. Check can be pinned down to `unitMs` which defaults to milliseconds. |
+| `isSameOrAfter`  | `cmp:UmAlQura\|Date`<br/>`unit?:unitMs` | Returns whether current instance is same as or after `cmp`. Check can be pinned down to `unitMs` which defaults to milliseconds. |
+| `isBetween`      | `from:UmAlQura\|Date`<br/>`to:UmAlQura\|Date`<br/>`fromIncl?:boolean`<br/>`toIncl?:boolean`<br/>`unit?:unitMs` | Returns whether current instance is between `from` and `to`. Check can be pinned down to `unitMs` which defaults to milliseconds. By, default the match is exclusive of both ends. This can be controlled via `fromIncl` and `toIncl`. |
+| `format`         | `mask:string`<br/>`locale?:string`     | Returns a formatted string of the Hijri date and time using the specified `mask` and optionally a `locale`. |
 
 `unitMs` can be any of the following strings: `year, month, week, day, hour, minute, second, millisecond`.
 
