@@ -19,7 +19,7 @@ yarn add @umalqura/core
 You can also use the library directly in the browser by adding the following to your html:
 
 ```html
-<script src="https://unpkg.com/@umalqura/core@0.0.2/dist/umalqura.min.js"></script>
+<script src="https://unpkg.com/@umalqura/core@0.0.3/dist/umalqura.min.js"></script>
 ```
 
 ### Usage
@@ -144,6 +144,8 @@ The following properties and functions exist directly on the export `umalqura` o
 |-----------------------------|----------------------------------------------------------------------------------------------
 | `VERSION`                   | Returns the library version.
 | `$`                         | Gives access to static methods.
+| `min`                       | Returns the minimum supported Hijri date.
+| `max`                       | Returns the maximum supported Hijri date.
 | `locale(locale?: string)`   | Gets or sets the local to be used globally.
 | `rtl()`                     | Returns whether current locale supports RTL.
 | `times()`                   | Returns the times names array according to currently set global locale.
