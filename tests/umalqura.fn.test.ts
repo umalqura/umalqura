@@ -4,6 +4,16 @@ import UmAlQuraStatic from '../src/UmAlQuraStatic';
 
 beforeEach(() => umalqura.locale('en'));
 
+describe('Props - Supported calendar range', () => {
+    it('min returns the minimum supported year.', () => {
+        expect(umalqura.min.date).toEqual(new Date(1900, 3, 30));
+    });
+
+    it('max returns the maximum supported year.', () => {
+        expect(umalqura.max.date).toEqual(new Date(2077, 10, 16, 23, 59, 59, 999));
+    });
+});
+
 describe('Locales', () => {
     it('locale() gets or sets the global locale', () => {
         expect(umalqura.locale()).toBe('en');

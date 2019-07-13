@@ -40,6 +40,14 @@ umalqura.VERSION = "0.0.0-DEV_BUILD";
  */
 umalqura.$ = UmAlQuraStatic;
 /**
+ * Returns the minimum supported Hijri date.
+ */
+umalqura.min = umalqura(UmAlQuraStatic['minCalendarYear'], 1, 1);
+/**
+ * Returns the maximum supported Hijri date.
+ */
+umalqura.max = umalqura(UmAlQuraStatic['maxCalendarYear'], 1, 1).endOf('year');
+/**
  * Gets or sets the global locale
   * @param locale The locale to set. If omitted, returns the current locale
  */

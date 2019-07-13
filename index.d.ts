@@ -29,6 +29,14 @@ declare namespace umalqura {
      */
     const $: typeof UmAlQuraStatic;
     /**
+     * Returns the minimum supported Hijri date.
+     */
+    const min: UmAlQura;
+    /**
+     * Returns the maximum supported Hijri date.
+     */
+    const max: UmAlQura;
+    /**
      * Gets or sets the global locale.
      * @param locale The locale to set. If omitted, returns the current locale
      */

@@ -28,14 +28,8 @@ class UmAlQuraStatic {
     // Holds registered locales
     private static locales: { [name: string]: Locale } = {};
 
-    /**
-     * The minimum supported Hijri calendar year.
-     */
-    public static readonly minCalendarYear = 1318;
-    /**
-     * The maximum supported Hijri calendar year.
-     */
-    public static readonly maxCalendarYear = 1500;
+    private static readonly minCalendarYear = 1318;
+    private static readonly maxCalendarYear = 1500;
 
     /**
      * Coverts the given Hijri date to Gregorian.
