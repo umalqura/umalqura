@@ -8,9 +8,8 @@ script:
   - npm run build && npm run test:coverage
 
 deploy:
-  provider: npm
-  email: EMAIL
-  api_key: NPM_TOKEN
+  provider: script
+  script: "cp .npmrc.template $HOME/.npmrc && npm publish"
   skip_cleanup: true
   on:
     tags: true
