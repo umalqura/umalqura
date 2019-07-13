@@ -92,3 +92,6 @@ typings/
 
 # rpt2 cache
 .rpt2_cache/
+
+# local build
+build.ps1
