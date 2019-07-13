@@ -19,7 +19,7 @@ yarn add @umalqura/core
 You can also use the library directly in the browser by adding the following to your html:
 
 ```html
-<script src="https://unpkg.com/@umalqura/core@0.0.1/dist/umalqura.min.js"></script>
+<script src="https://unpkg.com/@umalqura/core@0.0.2/dist/umalqura.min.js"></script>
 ```
 
 ### Usage
