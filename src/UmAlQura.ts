@@ -55,7 +55,10 @@ class UmAlQura {
     /**
      * Returns the Hijri month array of this instance.
      */
-    public get monthArray() { return UmAlQuraStatic.getMonthArray(this.date); }
+    public get monthArray() {
+        return UmAlQuraStatic.getMonthArray(this.date)
+            .map(w => w.map(d => d ? new UmAlQura(d) : null));
+    }
 
     /**
      * Creates an instance of UmAlQura.

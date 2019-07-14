@@ -269,7 +269,7 @@ declare namespace umalqura {
         /**
          * Returns the Hijri month array of this instance.
          */
-        readonly monthArray: (Date | null)[][];
+        readonly monthArray: (UmAlQura | null)[][];
         /**
          * Creates an instance of UmAlQura.
          */
