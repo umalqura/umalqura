@@ -16,6 +16,7 @@
         "object-literal-sort-keys": false,
         "jsdoc-format": false,
         "variable-name": false,
-        "no-string-literal": false
+        "no-string-literal": false,
+        "arrow-parens": false
     }
 }

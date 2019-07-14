@@ -1,6 +1,8 @@
 import UmAlQura from '../src/UmAlQura';
 import UmAlQuraStatic from '../src/UmAlQuraStatic';
 
+const flatten = <T extends {}>(arr: Array<Array<T | null>>) => arr.reduce((a, b) => a.concat(b), []);
+
 describe('constructor', () => {
     it('constructor() - Initializes using current date', () => {
         const now = new Date();
@@ -55,7 +57,10 @@ describe('Properties', () => {
         expect(uq.daysInYear).toBe(UmAlQuraStatic.getDaysInYear(uq.hy));
         expect(uq.daysInMonth).toBe(UmAlQuraStatic.getDaysInMonth(uq.hy, uq.hm));
         expect(uq.isLeapYear).toBe(UmAlQuraStatic.isLeapYear(uq.hy));
-        expect(uq.monthArray).toEqual(UmAlQuraStatic.getMonthArray(d));
+
+        const expectedMonthArray = flatten(uq.monthArray).map(u => u ? u.date : null);
+        const actualMonthArray = flatten(UmAlQuraStatic.getMonthArray(d));
+        expect(expectedMonthArray).toEqual(actualMonthArray);
     });
 });
 
