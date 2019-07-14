@@ -92,7 +92,6 @@ class UmAlQura {
      * Adds the specified amount of `unit` to the current date and returns a new instance.
      * @param {number} value The amount of units to be added
      * @param {UnitOfTimeMs} unit The unit of time
-     * @returns Reference to this instance.
      */
     public add(value: number, unit: UnitOfTimeMs) {
         switch (unit) {
@@ -118,7 +117,6 @@ class UmAlQura {
      * Subtracts the specified amount of `unit` from the current date and returns a new instance.
      * @param {number} value The amount of units to be subtracted
      * @param {UnitOfTimeMs} unit The unit of time
-     * @returns Reference to this instance.
      */
     public subtract(value: number, unit: UnitOfTimeMs) {
         return this.add(value * -1, unit);

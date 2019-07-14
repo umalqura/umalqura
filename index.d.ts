@@ -294,14 +294,12 @@ declare namespace umalqura {
          * Adds the specified amount of `unit` to the current date and returns a new instance.
          * @param {number} value The amount of units to be added
          * @param {UnitOfTimeMs} unit The unit of time
-         * @returns Reference to this instance.
          */
         add(value: number, unit: UnitOfTimeMs): UmAlQura;
         /**
          * Subtracts the specified amount of `unit` from the current date and returns a new instance.
          * @param {number} value The amount of units to be subtracted
          * @param {UnitOfTimeMs} unit The unit of time
-         * @returns Reference to this instance.
          */
         subtract(value: number, unit: UnitOfTimeMs): UmAlQura;
         /**

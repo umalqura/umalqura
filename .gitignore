@@ -95,3 +95,4 @@ typings/
 
 # local build
 build.ps1
+release.md
