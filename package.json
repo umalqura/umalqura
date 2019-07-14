@@ -1,6 +1,6 @@
 {
     "name": "@umalqura/core",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Zero dependency Hijri calendar based on Um AlQura",
     "main": "./dist/index.js",
     "module": "./dist/index.esm.js",
