@@ -20,7 +20,7 @@ class UmAlQura {
      */
     public get hm() { return this._hm; }
     /**
-     * Returns the Hijri day of this instance.
+     * Returns the Hijri day of month of this instance.
      */
     public get hd() { return this._hd; }
 
@@ -28,10 +28,6 @@ class UmAlQura {
      * Returns the Hijri day of year of this instance.
      */
     public get dayOfYear() { return UmAlQuraStatic.getDayOfYear(this.date); }
-    /**
-     * Returns the Hijri day of month year of this instance.
-     */
-    public get dayOfMonth() { return UmAlQuraStatic.getDayOfMonth(this.date); }
     /**
      * Returns the day of week of this instance.
      */

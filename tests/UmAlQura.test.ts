@@ -51,7 +51,6 @@ describe('Properties', () => {
         const uq = new UmAlQura(d);
 
         expect(uq.dayOfYear).toBe(UmAlQuraStatic.getDayOfYear(d));
-        expect(uq.dayOfMonth).toBe(UmAlQuraStatic.getDayOfMonth(d));
         expect(uq.dayOfWeek).toBe(UmAlQuraStatic.getDayOfWeek(d));
         expect(uq.weekOfYear).toBe(UmAlQuraStatic.getWeekOfYear(d));
         expect(uq.daysInYear).toBe(UmAlQuraStatic.getDaysInYear(uq.hy));

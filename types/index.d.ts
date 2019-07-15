@@ -235,17 +235,13 @@ declare namespace umalqura {
          */
         readonly hm: number;
         /**
-         * Returns the Hijri day of this instance.
+         * Returns the Hijri day of month of this instance.
          */
         readonly hd: number;
         /**
          * Returns the Hijri day of year of this instance.
          */
         readonly dayOfYear: number;
-        /**
-         * Returns the Hijri day of month year of this instance.
-         */
-        readonly dayOfMonth: number;
         /**
          * Returns the day of week of this instance.
          */

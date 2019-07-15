@@ -69,7 +69,6 @@ The `umalqura(...)` function returns an initialized `umalqura.UmAlQura` object w
 | `hm`          | Returns the Hijri month.                                        |
 | `hd`          | Returns the Hijri day of month.                                 |
 | `dayOfYear`   | Returns the Hijri day of year.                                  |
-| `dayOfMonth`  | Returns the Hijri day of month.                                 |
 | `dayOfWeek`   | Returns the day of week.                                        |
 | `weekOfYear`  | Returns the Hijri week of year.                                 |
 | `daysInYear`  | Returns the number of days in current Hijri year.               |
