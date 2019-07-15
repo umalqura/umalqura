@@ -26,14 +26,14 @@ describe('English locale test', () => {
     });
 
     it('masks', () => {
-        expect(l.masks.default).toBe('ddd mmm dd yyyy HH:MM:ss');
-        expect(l.masks.shortDate).toBe('m/d/yy');
-        expect(l.masks.mediumDate).toBe('mmm d, yyyy');
-        expect(l.masks.longDate).toBe('mmmm d, yyyy');
-        expect(l.masks.fullDate).toBe('dddd, mmmm d, yyyy');
-        expect(l.masks.shortTime).toBe('h:MM TT');
-        expect(l.masks.mediumTime).toBe('h:MM:ss TT');
-        expect(l.masks.longTime).toBe('h:MM:ss.l TT');
+        expect(l.masks.default).toBe('ddd MMM dd yyyy HH:mm:ss');
+        expect(l.masks.shortDate).toBe('M/d/yy');
+        expect(l.masks.mediumDate).toBe('MMM d, yyyy');
+        expect(l.masks.longDate).toBe('MMMM d, yyyy');
+        expect(l.masks.fullDate).toBe('dddd, MMMM d, yyyy');
+        expect(l.masks.shortTime).toBe('h:mm TT');
+        expect(l.masks.mediumTime).toBe('h:mm:ss TT');
+        expect(l.masks.longTime).toBe('h:mm:ss.l TT');
     });
 
     it('localizeNum - number', () => {

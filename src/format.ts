@@ -3,7 +3,7 @@
 
 import { Locale } from './locale';
 
-const token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LlSWN]|"[^"]*"|'[^']*'/g;
+const token = /d{1,4}|M{1,4}|yy(?:yy)?|([HhmsTt])\1?|[LlSWN]|"[^"]*"|'[^']*'/g;
 
 function pad(val: string | number, locale: Locale, len?: number) {
     val = String(val);
@@ -33,18 +33,18 @@ export function format(date: Date, mask: string, locale: Locale, hy: number, hm:
         dd: pad(d, locale),
         ddd: locale.dayNamesShort[D],
         dddd: locale.dayNames[D],
-        m: locale.localizeNum(m),
-        mm: pad(m, locale),
-        mmm: locale.monthNamesShort[m - 1],
-        mmmm: locale.monthNames[m - 1],
+        M: locale.localizeNum(m),
+        MM: pad(m, locale),
+        MMM: locale.monthNamesShort[m - 1],
+        MMMM: locale.monthNames[m - 1],
         yy: locale.localizeNum(String(y).slice(2)),
         yyyy: locale.localizeNum(y),
         h: locale.localizeNum(H % 12 || 12),
         hh: pad(H % 12 || 12, locale),
         H: locale.localizeNum(H),
         HH: pad(H, locale),
-        M: locale.localizeNum(M),
-        MM: pad(M, locale),
+        m: locale.localizeNum(M),
+        mm: pad(M, locale),
         s: locale.localizeNum(s),
         ss: pad(s, locale),
         l: pad(L, locale, 3),

@@ -203,25 +203,25 @@ describe('Date part retreival', () => {
 
 describe('Formatting', () => {
     it('formats correctly', () => {
-        const f = UmAlQuraStatic.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy HH:mm:ss.l', 'en');
-        expect(f).toBe('30/10/1440 02:10:15.200');
+        const f = UmAlQuraStatic.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/MM/yyyy HH:mm:ss.l', 'en');
+        expect(f).toBe('30/10/1440 02:37:15.200');
     });
 
     it('Uses default locale when not defined', () => {
-        const f = UmAlQuraStatic.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy HH:mm:ss.l');
-        expect(f).toBe('30/10/1440 02:10:15.200');
+        const f = UmAlQuraStatic.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/MM/yyyy HH:mm:ss.l');
+        expect(f).toBe('30/10/1440 02:37:15.200');
     });
 
     it('Uses default locale when supplied locale does not exist', () => {
-        const f = UmAlQuraStatic.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy HH:mm:ss.l', 'doesnt exist');
-        expect(f).toBe('30/10/1440 02:10:15.200');
+        const f = UmAlQuraStatic.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/MM/yyyy HH:mm:ss.l', 'doesnt exist');
+        expect(f).toBe('30/10/1440 02:37:15.200');
     });
 });
 
 describe('Locales', () => {
     it('Can set global locale and is used for formatting', () => {
         UmAlQuraStatic.setLocale('ar');
-        const f = UmAlQuraStatic.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/mm/yyyy');
+        const f = UmAlQuraStatic.format(new Date(2019, 6, 3, 2, 37, 15, 200), 'dd/MM/yyyy');
         expect(f).toBe('٣٠/١٠/١٤٤٠');
     });
 
