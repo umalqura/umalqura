@@ -12,14 +12,14 @@ const ar: Locale = {
     monthNames: ['محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'],
     timeNames: ['ص', 'م', 'ص', 'م', 'ص', 'م', 'ص', 'م'],
     masks: {
-        default: 'ddd dd mmm yyyy HH:MM:ss',
-        shortDate: 'yy/m/d',
-        mediumDate: 'd mmm, yyyy',
-        longDate: 'd mmmm, yyyy',
-        fullDate: 'dddd, d mmmm, yyyy',
-        shortTime: 'h:MM TT',
-        mediumTime: 'h:MM:ss TT',
-        longTime: 'h:MM:ss.l TT',
+        default: 'ddd dd MMM yyyy HH:mm:ss',
+        shortDate: 'yy/M/d',
+        mediumDate: 'd MMM, yyyy',
+        longDate: 'd MMMM, yyyy',
+        fullDate: 'dddd, d MMMM, yyyy',
+        shortTime: 'h:mm TT',
+        mediumTime: 'h:mm:ss TT',
+        longTime: 'h:mm:ss.l TT',
     },
     localizeNum: (num: number | string) => {
         const s = String(num);

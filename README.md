@@ -123,9 +123,9 @@ const d = uq(new Date(2019, 6, 3));
 const after5HijriMonths = d.add(5, 'month');
 
 // ٣٠/١٠/١٤٤٠
-d.format('dd/mm/yyyy', 'ar');
+d.format('dd/MM/yyyy', 'ar');
 // 30/03/1441
-after5HijriMonths.format('dd/mm/yyyy');
+after5HijriMonths.format('dd/MM/yyyy');
 // True
 after5HijriMonths.isAfter(d);
 // Shawwāl 1, 1440
@@ -172,14 +172,14 @@ uq.months();
 
 | Name         | Format                                                                      |
 |--------------|-----------------------------------------------------------------------------|
-| `default`    | `ddd dd mmm yyyy HH:MM:ss` for `ar`<br/>`ddd mmm dd yyyy HH:MM:ss` for `en` |
-| `shortDate`  | `yy/m/d` for `ar`<br/>`m/d/yy` for `en`                                     |
-| `mediumDate` | `d mmm, yyyy` for `ar`<br/>`mmm d, yyyy` for `en`                           |
-| `longDate`   | `d mmmm, yyyy` for `ar`<br/>`mmmm d, yyyy` for `en`                         |
-| `fullDate`   | `dddd, d mmmm, yyyy` for `ar`<br/>`dddd, mmmm d, yyyy` for `en`             |
-| `shortTime`  | `h:MM TT`                                                                   |
-| `mediumTime` | `h:MM:ss TT`                                                                |
-| `longTime`   | `h:MM:ss.l TT`                                                              |
+| `default`    | `ddd dd MMM yyyy HH:mm:ss` for `ar`<br/>`ddd MMM dd yyyy HH:mm:ss` for `en` |
+| `shortDate`  | `yy/M/d` for `ar`<br/>`M/d/yy` for `en`                                     |
+| `mediumDate` | `d MMM, yyyy` for `ar`<br/>`MMM d, yyyy` for `en`                           |
+| `longDate`   | `d MMMM, yyyy` for `ar`<br/>`MMMM d, yyyy` for `en`                         |
+| `fullDate`   | `dddd, d MMMM, yyyy` for `ar`<br/>`dddd, MMMM d, yyyy` for `en`             |
+| `shortTime`  | `h:mm TT`                                                                   |
+| `mediumTime` | `h:mm:ss TT`                                                                |
+| `longTime`   | `h:mm:ss.l TT`                                                              |
 
 
 ### Sample

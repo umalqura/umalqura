@@ -27,14 +27,14 @@ describe('Arabic locale test', () => {
     });
 
     it('masks', () => {
-        expect(l.masks.default).toBe('ddd dd mmm yyyy HH:MM:ss');
-        expect(l.masks.shortDate).toBe('yy/m/d');
-        expect(l.masks.mediumDate).toBe('d mmm, yyyy');
-        expect(l.masks.longDate).toBe('d mmmm, yyyy');
-        expect(l.masks.fullDate).toBe('dddd, d mmmm, yyyy');
-        expect(l.masks.shortTime).toBe('h:MM TT');
-        expect(l.masks.mediumTime).toBe('h:MM:ss TT');
-        expect(l.masks.longTime).toBe('h:MM:ss.l TT');
+        expect(l.masks.default).toBe('ddd dd MMM yyyy HH:mm:ss');
+        expect(l.masks.shortDate).toBe('yy/M/d');
+        expect(l.masks.mediumDate).toBe('d MMM, yyyy');
+        expect(l.masks.longDate).toBe('d MMMM, yyyy');
+        expect(l.masks.fullDate).toBe('dddd, d MMMM, yyyy');
+        expect(l.masks.shortTime).toBe('h:mm TT');
+        expect(l.masks.mediumTime).toBe('h:mm:ss TT');
+        expect(l.masks.longTime).toBe('h:mm:ss.l TT');
     });
 
     it('localizeNum - number', () => {
