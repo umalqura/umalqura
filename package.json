@@ -6,7 +6,7 @@
     "module": "./dist/index.esm.js",
     "umd": "./dist/umalqura.js",
     "umd_name": "umalqura",
-    "types": "index.d.ts",
+    "types": "./types/index.d.ts",
     "scripts": {
         "clean": "node ./node_modules/rimraf/bin.js ./dist",
         "build": "yarn run build:lint && yarn run build:rollup && yarn run build:uglify:umd",
@@ -35,7 +35,7 @@
         "LICENSE",
         "README.md",
         "dist/*",
-        "index.d.ts"
+        "types/index.d.ts"
     ],
     "keywords": [
         "hijri",
