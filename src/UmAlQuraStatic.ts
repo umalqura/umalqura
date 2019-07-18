@@ -10,9 +10,8 @@ import { UnitOfTime } from './units';
 ///     Gregorian   1900/04/30  2077/11/16
 ///     UmAlQura    1318/01/01  1500/12/30
 class UmAlQuraStatic {
-    private static readonly maxSeconds = 9223372036854775807 / 10000000;
-    private static readonly minSeconds = -9223372036854775807 / 10000000;
-
+    // private static readonly maxSeconds = 9223372036854775807 / 10000000;
+    // private static readonly minSeconds = -9223372036854775807 / 10000000;
     private static readonly millisPerSecond = 1000;
     private static readonly millisPerMinute = UmAlQuraStatic.millisPerSecond * 60;
     private static readonly millisPerHour = UmAlQuraStatic.millisPerMinute * 60;
@@ -139,7 +138,8 @@ class UmAlQuraStatic {
             }
         }
 
-        return new Date(this._getAbsoluteDateUmAlQura(y, m, d) * this.millisPerDay + date.getTime() % this.millisPerDay);
+        const { gy, gm, gd } = this.hijriToGregorian(y, m, d);
+        return this._setTime(new Date(gy, gm, gd), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
     }
 
     /**
@@ -400,9 +400,12 @@ class UmAlQuraStatic {
             throw new Error(`Invalid value for day for the given year/month. Day must be between 1 and ${daysInMonth}.`);
         }
 
-        const lDate = this._getAbsoluteDateUmAlQura(hy, hm, hd);
+        if (hour < 0 || hour >= 24 || minute < 0 || minute >= 60 || second < 0 || second >= 60 || millisecond < 0 || millisecond >= this.millisPerSecond) {
+            throw new Error('Invalid value for hour, minute, second or millisecond.');
+        }
 
-        return new Date(lDate * this.millisPerDay + this._timeToMillis(hour, minute, second, millisecond));
+        const { gy, gm, gd } = this.hijriToGregorian(hy, hm, hd);
+        return this._setTime(new Date(gy, gm, gd), hour, minute, second, millisecond);
     }
 
     /**
@@ -468,22 +471,17 @@ class UmAlQuraStatic {
         }
     }
 
+    private static _setTime(date: Date, hour: number, minute: number, second: number, millisecond: number) {
+        date.setHours(hour);
+        date.setMinutes(minute);
+        date.setSeconds(second);
+        date.setMilliseconds(millisecond);
+        return date;
+    }
+
     private static _getAbsoluteDateUmAlQura(hy: number, hm: number, hd: number) {
         const { gy, gm, gd } = this.hijriToGregorian(hy, hm, hd);
         return new Date(gy, gm, gd).getTime() / this.millisPerDay;
-    }
-
-    private static _timeToMillis(hour: number, minute: number, second: number, millisecond: number) {
-        if (hour < 0 || hour >= 24 || minute < 0 || minute >= 60 || second < 0 || second >= 60 || millisecond < 0 || millisecond >= this.millisPerSecond) {
-            throw new Error('Invalid value for hour, minute, second or millisecond.');
-        }
-
-        const totalSeconds = hour * 3600 + minute * 60 + second;
-        if (totalSeconds > this.maxSeconds || totalSeconds < this.minSeconds) {
-            throw new Error('Time overflow error. This is possibly a bug.');
-        }
-
-        return (totalSeconds * this.millisPerSecond) + millisecond;
     }
 
     private static _checkYearRange(hy: number) {

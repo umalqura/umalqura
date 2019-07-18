@@ -30,7 +30,12 @@ describe('Date conversion', () => {
 
     it('toDate()', () => {
         const r = UmAlQuraStatic.toDate(1440, 10, 30, 1, 5, 10, 20);
-        expect(r.getTime()).toBe(new Date(2019, 6, 3, 1, 5, 10, 20).getTime());
+        expect(r).toEqual(new Date(2019, 6, 3, 1, 5, 10, 20));
+    });
+
+    it('toDate() - old timezone (SA)', () => {
+        const r = UmAlQuraStatic.toDate(1318, 5, 1, 1, 5, 10, 20);
+        expect(r).toEqual(new Date(1900, 7, 26, 1, 5, 10, 20));
     });
 });
 
@@ -49,6 +54,32 @@ describe('Date manipulation', () => {
         expect(d.getFullYear()).toBe(2019);
         expect(d.getMonth()).toBe(10);
         expect(d.getDate()).toBe(27);
+    });
+
+    it('addMonths() older timezone (SA)', () => {
+        const { gy, gm, gd } = UmAlQuraStatic.hijriToGregorian(1318, 5, 1);
+        const d = UmAlQuraStatic.addMonths(new Date(gy, gm, gd, 16, 45, 11, 150), 5);
+        const { hy, hm, hd } = UmAlQuraStatic.gregorianToHijri(d);
+
+        expect(hy).toBe(1318);
+        expect(hm).toBe(10);
+        expect(hd).toBe(1);
+        expect(d.getHours()).toBe(16);
+        expect(d.getMinutes()).toBe(45);
+        expect(d.getSeconds()).toBe(11);
+        expect(d.getMilliseconds()).toBe(150);
+    });
+
+    it('addMonths() with time', () => {
+        const d = UmAlQuraStatic.addMonths(new Date(2019, 6, 3, 16, 45, 11, 150), 5);
+
+        expect(d.getFullYear()).toBe(2019);
+        expect(d.getMonth()).toBe(10);
+        expect(d.getDate()).toBe(27);
+        expect(d.getHours()).toBe(16);
+        expect(d.getMinutes()).toBe(45);
+        expect(d.getSeconds()).toBe(11);
+        expect(d.getMilliseconds()).toBe(150);
     });
 
     it('addMonths() - negative', () => {
