@@ -19,17 +19,17 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "@types/jest": "^24.0.15",
-        "coveralls": "^3.0.5",
-        "jest": "^24.8.0",
-        "rimraf": "^2.6.3",
-        "rollup": "^1.16.7",
-        "rollup-plugin-typescript2": "^0.21.2",
-        "ts-jest": "^24.0.2",
-        "ts-loader": "^6.0.4",
-        "tslint": "^5.18.0",
-        "typescript": "^3.5.3",
-        "uglify-js": "^3.6.0"
+        "@types/jest": "^24.0.19",
+        "coveralls": "^3.0.7",
+        "jest": "^24.9.0",
+        "rimraf": "^3.0.0",
+        "rollup": "^1.24.0",
+        "rollup-plugin-typescript2": "^0.24.3",
+        "ts-jest": "^24.1.0",
+        "ts-loader": "^6.2.0",
+        "tslint": "^5.20.0",
+        "typescript": "^3.6.4",
+        "uglify-js": "^3.6.2"
     },
     "files": [
         "LICENSE",
