@@ -11,7 +11,7 @@
         "clean": "node ./node_modules/rimraf/bin.js ./dist",
         "build": "yarn run build:lint && yarn run build:rollup && yarn run build:uglify:umd",
         "build:lint": "node ./node_modules/tslint/bin/tslint -c ./tslint.json -p ./tsconfig.json",
-        "build:rollup": "node ./node_modules/rollup/dist/rollup -c",
+        "build:rollup": "node ./node_modules/rollup/dist/bin/rollup -c",
         "build:uglify:umd": "node ./node_modules/uglify-js/bin/uglifyjs --comments -o ./dist/umalqura.min.js ./dist/umalqura.js",
         "prepack": "node ./build/embed-version.js",
         "test": "node ./node_modules/jest/bin/jest.js",
