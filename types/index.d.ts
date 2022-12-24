@@ -78,7 +78,7 @@ declare namespace umalqura {
         /**
          * The minimum supported Hijri calendar year.
          */
-        static readonly minCalendarYear = 1318;
+        static readonly minCalendarYear = 1276;
         /**
          * The maximum supported Hijri calendar year.
          */
