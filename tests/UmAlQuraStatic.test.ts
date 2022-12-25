@@ -275,7 +275,7 @@ describe('Locales', () => {
 
 describe('Input validation', () => {
     it('hijriToGregorian() throws for out of range year', () => {
-        expect(() => UmAlQuraStatic.hijriToGregorian(1300, 1, 1)).toThrow('Invalid value for year. Must be between 1318 and 1500.');
+        expect(() => UmAlQuraStatic.hijriToGregorian(1200, 1, 1)).toThrow('Invalid value for year. Must be between 1276 and 1500.');
     });
 
     it('hijriToGregorian() throws for out of range month', () => {
